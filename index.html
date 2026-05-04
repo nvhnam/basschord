@@ -1,419 +1,1765 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bass Chord Reference — 12 Keys</title>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f7f6f2;--surface:#fff;--border:rgba(0,0,0,.10);--border-l:rgba(0,0,0,.06);
-  --text:#1a1a18;--text2:#5a5955;--text3:#8a8985;
-  --accent:#4a47d0;--accent-bg:#eeedfe;--accent-fg:#3C3489;
-  --n-rb:#E6F1FB;--n-rf:#0C447C;
-  --n-3b:#EAF3DE;--n-3f:#3B6D11;
-  --n-7b:#FAEEDA;--n-7f:#633806;
-  --n-tb:#EEEDFE;--n-tf:#3C3489;
-  --n-5b:#F1EFE8;--n-5f:#5F5E5A;
-}
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg:#1a1a18;--surface:#252523;--border:rgba(255,255,255,.10);--border-l:rgba(255,255,255,.06);
-    --text:#f0efe9;--text2:#a0a09a;--text3:#606058;
-    --accent:#9b98f0;--accent-bg:#26215c;--accent-fg:#CECBF6;
-    --n-rb:#042C53;--n-rf:#B5D4F4;
-    --n-3b:#173404;--n-3f:#C0DD97;
-    --n-7b:#412402;--n-7f:#FAC775;
-    --n-tb:#26215C;--n-tf:#CECBF6;
-    --n-5b:#2C2C2A;--n-5f:#B4B2A9;
-  }
-}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-
-/* Header */
-.header{background:var(--surface);border-bottom:.5px solid var(--border);padding:1.1rem 1.5rem .8rem;position:sticky;top:0;z-index:100}
-.header-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:.9rem;flex-wrap:wrap}
-.header-top h1{font-size:16px;font-weight:500}
-.tab-bar{display:flex;gap:4px}
-.tab-btn{font-size:12px;font-weight:500;padding:5px 14px;border:.5px solid var(--border);border-radius:20px;background:transparent;color:var(--text2);cursor:pointer;transition:all .13s;letter-spacing:.04em}
-.tab-btn:hover{background:var(--bg);color:var(--text)}
-.tab-btn.active{background:var(--accent-bg);color:var(--accent-fg);border-color:var(--accent)}
-.key-row{display:flex;gap:5px;flex-wrap:wrap}
-.key-btn{width:44px;height:38px;border:.5px solid var(--border);border-radius:7px;background:transparent;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .13s;display:flex;align-items:center;justify-content:center}
-.key-btn:hover{background:var(--bg);color:var(--text)}
-.key-btn.active{background:var(--accent-bg);color:var(--accent-fg);border-color:var(--accent);font-weight:600}
-.key-btn.acc{font-size:11px}
-
-/* Controls */
-.controls{padding:.55rem 1.5rem;background:var(--surface);border-bottom:.5px solid var(--border-l);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.filter-label{font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
-.filter-bar{display:flex;gap:5px;flex-wrap:wrap}
-.fbtn{font-size:12px;padding:3px 11px;border:.5px solid var(--border);border-radius:20px;background:transparent;color:var(--text2);cursor:pointer;transition:all .13s}
-.fbtn:hover{background:var(--bg);color:var(--text)}
-.fbtn.active{background:var(--bg);color:var(--text);font-weight:500;border-color:var(--border)}
-.badge{font-size:11px;padding:2px 9px;border-radius:20px;background:var(--accent-bg);color:var(--accent-fg);font-weight:500;margin-left:auto}
-
-/* Content */
-.content{padding:1.2rem 1.5rem;max-width:1280px}
-.legend{display:flex;flex-wrap:wrap;gap:13px;margin-bottom:1.2rem;font-size:12px;color:var(--text2)}
-.leg-item{display:flex;align-items:center;gap:5px}
-.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.group-block{margin-bottom:1.6rem}
-.group-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;padding-bottom:4px;border-bottom:.5px solid var(--border-l);display:flex;align-items:center;gap:5px}
-.grp-cnt{opacity:.5;font-weight:400}
-
-/* Chord Table (VIE/ENG tab) */
-.ctable{width:100%;border-collapse:collapse;font-size:13px;background:var(--surface);border-radius:9px;overflow:hidden;border:.5px solid var(--border)}
-.ctable th{text-align:left;font-weight:500;font-size:11px;color:var(--text2);padding:7px 11px;border-bottom:.5px solid var(--border);background:var(--bg)}
-.ctable td{padding:7px 11px;border-bottom:.5px solid var(--border-l);vertical-align:middle;color:var(--text)}
-.ctable tr:last-child td{border-bottom:none}
-.ctable tbody tr:hover td{background:rgba(128,128,128,.04)}
-.cname{font-weight:500;font-size:14px;white-space:nowrap}
-.caka{font-size:11px;color:var(--text3);margin-top:1px}
-.cfm{color:var(--text2);font-size:12px;white-space:nowrap}
-.cnotes{font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:12px;color:var(--text2);white-space:nowrap}
-.ctip{font-size:12px;color:var(--text2);max-width:230px}
-.pills{display:flex;gap:4px;flex-wrap:wrap;min-width:140px}
-.pill{padding:3px 9px;border-radius:20px;font-size:12px;font-weight:500;white-space:nowrap}
-.n-root{background:var(--n-rb);color:var(--n-rf)}
-.n-3rd {background:var(--n-3b);color:var(--n-3f)}
-.n-7th {background:var(--n-7b);color:var(--n-7f)}
-.n-tension{background:var(--n-tb);color:var(--n-tf)}
-.n-5th {background:var(--n-5b);color:var(--n-5f)}
-
-/* Fretboard tab */
-.fb-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1rem 1.1rem;margin-bottom:1rem}
-.fb-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;flex-wrap:wrap;gap:8px}
-.fb-cname{font-size:16px;font-weight:500}
-.fb-fm{font-size:12px;color:var(--text2);margin-left:8px}
-.fb-fret{overflow-x:auto;margin:.75rem 0 .6rem}
-.pos-wrap{overflow-x:auto}
-.pos-table{width:100%;border-collapse:collapse;font-size:12px;min-width:380px}
-.pos-table th{text-align:center;font-weight:500;font-size:11px;color:var(--text2);padding:5px 8px;border-bottom:.5px solid var(--border);background:var(--bg);border-radius:0}
-.pos-table th:first-child{text-align:left}
-.pos-table td{padding:5px 8px;border-bottom:.5px solid var(--border-l);text-align:center;color:var(--text2);font-size:12px}
-.pos-table tr:last-child td{border-bottom:none}
-.pos-table td:first-child{text-align:left}
-.best{font-weight:600;color:var(--text)}
-.open-lbl{font-size:11px;font-style:italic;color:var(--text3)}
-.star{color:var(--accent-fg);margin-left:2px;font-size:11px}
-
-@media(max-width:800px){
-  .ctable th:nth-child(3),.ctable td:nth-child(3),.ctable th:nth-child(5),.ctable td:nth-child(5){display:none}
-  .content{padding:.9rem}
-  .header{padding:.9rem 1rem .7rem}
-  .controls{padding:.45rem 1rem}
-}
-@media(max-width:540px){
-  .ctable th:nth-child(2),.ctable td:nth-child(2){display:none}
-  .key-btn{width:37px;height:34px;font-size:12px}
-}
-</style>
-</head>
-<body>
-
-<div class="header">
-  <div class="header-top">
-    <h1>Bass Chord Reference</h1>
-    <div class="tab-bar" id="tabBar">
-      <button class="tab-btn active" data-tab="vie">VIE</button>
-      <button class="tab-btn" data-tab="eng">ENG</button>
-      <button class="tab-btn" data-tab="fretboard">FRETBOARD</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bass Chord Reference — 12 Keys</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #f7f6f2;
+        --surface: #fff;
+        --border: rgba(0, 0, 0, 0.1);
+        --border-l: rgba(0, 0, 0, 0.06);
+        --text: #1a1a18;
+        --text2: #5a5955;
+        --text3: #8a8985;
+        --accent: #4a47d0;
+        --accent-bg: #eeedfe;
+        --accent-fg: #3c3489;
+        --n-rb: #e6f1fb;
+        --n-rf: #0c447c;
+        --n-3b: #eaf3de;
+        --n-3f: #3b6d11;
+        --n-7b: #faeeda;
+        --n-7f: #633806;
+        --n-tb: #eeedfe;
+        --n-tf: #3c3489;
+        --n-5b: #f1efe8;
+        --n-5f: #5f5e5a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1a1a18;
+          --surface: #252523;
+          --border: rgba(255, 255, 255, 0.1);
+          --border-l: rgba(255, 255, 255, 0.06);
+          --text: #f0efe9;
+          --text2: #a0a09a;
+          --text3: #606058;
+          --accent: #9b98f0;
+          --accent-bg: #26215c;
+          --accent-fg: #cecbf6;
+          --n-rb: #042c53;
+          --n-rf: #b5d4f4;
+          --n-3b: #173404;
+          --n-3f: #c0dd97;
+          --n-7b: #412402;
+          --n-7f: #fac775;
+          --n-tb: #26215c;
+          --n-tf: #cecbf6;
+          --n-5b: #2c2c2a;
+          --n-5f: #b4b2a9;
+        }
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--surface);
+        border-bottom: 0.5px solid var(--border);
+        padding: 1.1rem 1.5rem 0.8rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 0.9rem;
+        flex-wrap: wrap;
+      }
+      .header-top h1 {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .tab-bar {
+        display: flex;
+        gap: 4px;
+      }
+      .tab-btn {
+        font-size: 12px;
+        font-weight: 500;
+        padding: 5px 14px;
+        border: 0.5px solid var(--border);
+        border-radius: 20px;
+        background: transparent;
+        color: var(--text2);
+        cursor: pointer;
+        transition: all 0.13s;
+        letter-spacing: 0.04em;
+      }
+      .tab-btn:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .tab-btn.active {
+        background: var(--accent-bg);
+        color: var(--accent-fg);
+        border-color: var(--accent);
+      }
+      .key-row {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .key-btn {
+        width: 44px;
+        height: 38px;
+        border: 0.5px solid var(--border);
+        border-radius: 7px;
+        background: transparent;
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.13s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .key-btn:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .key-btn.active {
+        background: var(--accent-bg);
+        color: var(--accent-fg);
+        border-color: var(--accent);
+        font-weight: 600;
+      }
+      .key-btn.acc {
+        font-size: 11px;
+      }
+      .controls {
+        padding: 0.55rem 1.5rem;
+        background: var(--surface);
+        border-bottom: 0.5px solid var(--border-l);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .filter-label {
+        font-size: 11px;
+        color: var(--text3);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+      .filter-bar {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .fbtn {
+        font-size: 12px;
+        padding: 3px 11px;
+        border: 0.5px solid var(--border);
+        border-radius: 20px;
+        background: transparent;
+        color: var(--text2);
+        cursor: pointer;
+        transition: all 0.13s;
+      }
+      .fbtn:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .fbtn.active {
+        background: var(--bg);
+        color: var(--text);
+        font-weight: 500;
+        border-color: var(--border);
+      }
+      .badge {
+        font-size: 11px;
+        padding: 2px 9px;
+        border-radius: 20px;
+        background: var(--accent-bg);
+        color: var(--accent-fg);
+        font-weight: 500;
+        margin-left: auto;
+      }
+      .content {
+        padding: 1.2rem 1.5rem;
+        max-width: 1280px;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        margin-bottom: 1.2rem;
+        font-size: 12px;
+        color: var(--text2);
+      }
+      .leg-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .leg-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .group-block {
+        margin-bottom: 1.6rem;
+      }
+      .group-label {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--text3);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.45rem;
+        padding-bottom: 4px;
+        border-bottom: 0.5px solid var(--border-l);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .grp-cnt {
+        opacity: 0.5;
+        font-weight: 400;
+      }
+      .ctable {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        background: var(--surface);
+        border-radius: 9px;
+        overflow: hidden;
+        border: 0.5px solid var(--border);
+      }
+      .ctable th {
+        text-align: left;
+        font-weight: 500;
+        font-size: 11px;
+        color: var(--text2);
+        padding: 7px 11px;
+        border-bottom: 0.5px solid var(--border);
+        background: var(--bg);
+      }
+      .ctable td {
+        padding: 7px 11px;
+        border-bottom: 0.5px solid var(--border-l);
+        vertical-align: middle;
+        color: var(--text);
+      }
+      .ctable tr:last-child td {
+        border-bottom: none;
+      }
+      .ctable tbody tr:hover td {
+        background: rgba(128, 128, 128, 0.04);
+      }
+      .cname {
+        font-weight: 500;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .caka {
+        font-size: 11px;
+        color: var(--text3);
+        margin-top: 1px;
+      }
+      .cfm {
+        color: var(--text2);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .cnotes {
+        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+        font-size: 12px;
+        color: var(--text2);
+        white-space: nowrap;
+      }
+      .ctip {
+        font-size: 12px;
+        color: var(--text2);
+        max-width: 230px;
+      }
+      .pills {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        min-width: 140px;
+      }
+      .pill {
+        padding: 3px 9px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .n-root {
+        background: var(--n-rb);
+        color: var(--n-rf);
+      }
+      .n-3rd {
+        background: var(--n-3b);
+        color: var(--n-3f);
+      }
+      .n-7th {
+        background: var(--n-7b);
+        color: var(--n-7f);
+      }
+      .n-tension {
+        background: var(--n-tb);
+        color: var(--n-tf);
+      }
+      .n-5th {
+        background: var(--n-5b);
+        color: var(--n-5f);
+      }
+      .fb-card {
+        background: var(--surface);
+        border: 0.5px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem 1.1rem;
+        margin-bottom: 1rem;
+      }
+      .fb-hdr {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .fb-cname {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .fb-fm {
+        font-size: 12px;
+        color: var(--text2);
+        margin-left: 8px;
+      }
+      .fb-fret {
+        overflow-x: auto;
+        margin: 0.75rem 0 0.6rem;
+      }
+      .pos-wrap {
+        overflow-x: auto;
+      }
+      .pos-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        min-width: 380px;
+      }
+      .pos-table th {
+        text-align: center;
+        font-weight: 500;
+        font-size: 11px;
+        color: var(--text2);
+        padding: 5px 8px;
+        border-bottom: 0.5px solid var(--border);
+        background: var(--bg);
+      }
+      .pos-table th:first-child {
+        text-align: left;
+      }
+      .pos-table td {
+        padding: 5px 8px;
+        border-bottom: 0.5px solid var(--border-l);
+        text-align: center;
+        color: var(--text2);
+        font-size: 12px;
+      }
+      .pos-table tr:last-child td {
+        border-bottom: none;
+      }
+      .pos-table td:first-child {
+        text-align: left;
+      }
+      .best {
+        font-weight: 600;
+        color: var(--text);
+      }
+      .open-lbl {
+        font-size: 11px;
+        font-style: italic;
+        color: var(--text3);
+      }
+      .star {
+        color: var(--accent-fg);
+        margin-left: 2px;
+        font-size: 11px;
+      }
+      @media (max-width: 800px) {
+        .ctable th:nth-child(3),
+        .ctable td:nth-child(3),
+        .ctable th:nth-child(5),
+        .ctable td:nth-child(5) {
+          display: none;
+        }
+        .content {
+          padding: 0.9rem;
+        }
+        .header {
+          padding: 0.9rem 1rem 0.7rem;
+        }
+        .controls {
+          padding: 0.45rem 1rem;
+        }
+      }
+      @media (max-width: 540px) {
+        .ctable th:nth-child(2),
+        .ctable td:nth-child(2) {
+          display: none;
+        }
+        .key-btn {
+          width: 37px;
+          height: 34px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-top">
+        <h1>Bass Chord Reference</h1>
+        <div class="tab-bar" id="tabBar">
+          <button class="tab-btn active" data-tab="vie">VIE</button>
+          <button class="tab-btn" data-tab="eng">ENG</button>
+          <button class="tab-btn" data-tab="fretboard">FRETBOARD</button>
+        </div>
+      </div>
+      <div class="key-row" id="keySelector"></div>
     </div>
-  </div>
-  <div class="key-row" id="keySelector"></div>
-</div>
+    <div class="controls">
+      <span class="filter-label" id="fltLbl">Nhóm:</span>
+      <div class="filter-bar" id="filterBar"></div>
+      <span class="badge" id="badge"></span>
+    </div>
+    <div class="content">
+      <div class="legend" id="legend"></div>
+      <div id="container"></div>
+    </div>
+    <script>
+      // ── Enharmonic-correct note engine ─────────────────────────────────────────
+      // Major scale for each key: 7 diatonic notes
+      const MAJOR = {
+        C: ["C", "D", "E", "F", "G", "A", "B"],
+        Db: ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"],
+        D: ["D", "E", "F#", "G", "A", "B", "C#"],
+        Eb: ["Eb", "F", "G", "Ab", "Bb", "C", "D"],
+        E: ["E", "F#", "G#", "A", "B", "C#", "D#"],
+        F: ["F", "G", "A", "Bb", "C", "D", "E"],
+        "F#": ["F#", "G#", "A#", "B", "C#", "D#", "E#"],
+        G: ["G", "A", "B", "C", "D", "E", "F#"],
+        Ab: ["Ab", "Bb", "C", "Db", "Eb", "F", "G"],
+        A: ["A", "B", "C#", "D", "E", "F#", "G#"],
+        Bb: ["Bb", "C", "D", "Eb", "F", "G", "A"],
+        B: ["B", "C#", "D#", "E", "F#", "G#", "A#"],
+      };
 
-<div class="controls">
-  <span class="filter-label" id="fltLbl">Nhóm:</span>
-  <div class="filter-bar" id="filterBar"></div>
-  <span class="badge" id="badge"></span>
-</div>
+      // Semitone lookup (for fretboard positions)
+      const N2S = {
+        C: 0,
+        "C#": 1,
+        Db: 1,
+        D: 2,
+        "D#": 3,
+        Eb: 3,
+        E: 4,
+        "E#": 5,
+        Fb: 4,
+        F: 5,
+        "F#": 6,
+        Gb: 6,
+        G: 7,
+        "G#": 8,
+        Ab: 8,
+        A: 9,
+        "A#": 10,
+        Bb: 10,
+        B: 11,
+        "B#": 0,
+        Cb: 11,
+      };
+      const FL = [
+        "C",
+        "Db",
+        "D",
+        "Eb",
+        "E",
+        "F",
+        "Gb",
+        "G",
+        "Ab",
+        "A",
+        "Bb",
+        "B",
+      ];
 
-<div class="content">
-  <div class="legend" id="legend"></div>
-  <div id="container"></div>
-</div>
+      // Apply accidental to a base note name (theoretically correct)
+      function applyAcc(note, acc) {
+        if (!acc) return note;
+        if (acc === "#") {
+          if (note.endsWith("b")) return note.slice(0, -1); // Bb+# → B
+          return note + "#"; // D+# → D#
+        }
+        if (acc === "b") {
+          if (note.endsWith("#")) return note.slice(0, -1); // F#+b → F
+          return note + "b"; // B+b → Bb
+        }
+        if (acc === "bb") {
+          // Double flat: drop 2 semitones, use flat names
+          const s = N2S[note];
+          if (s === undefined) return note;
+          return FL[(((s - 2) % 12) + 12) % 12];
+        }
+        return note;
+      }
 
-<script>
-// ── Transposition engine ───────────────────────────────────────────────────
-const N2S={C:0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,'E#':5,Fb:4,F:5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,'B#':0,Cb:11};
-const SH=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-const FL=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
-const FLAT_K=new Set(['F','Bb','Eb','Ab','Db','Gb']);
-function n2name(s,k){return FLAT_K.has(k)?FL[s]:SH[s]}
-function tNote(n,off,k){const s=N2S[n];if(s===undefined)return n;return n2name(((s+off)%12+12)%12,k)}
-function tChord(name,off,k){
-  if(name.includes(' / '))return name.split(' / ').map(p=>tChord(p,off,k)).join(' / ');
-  const m=name.match(/^([A-G][#b]?)(.*)/);if(!m)return name;
-  return tNote(m[1],off,k)+m[2];
-}
-function tNoteStr(str,off,k){return str.split('–').map(n=>tNote(n.trim(),off,k)).join('–')}
+      // Get note name from interval: degree (1-7) + accidental ('','b','#','bb')
+      function iNote(key, deg, acc) {
+        const base = MAJOR[key][deg - 1];
+        return applyAcc(base, acc);
+      }
 
-// ── Data ───────────────────────────────────────────────────────────────────
-const DATA=[
-  {group:"Triads",groupE:"Triads",cat:"triad",rows:[
-    {name:"C",      aka:"major",       f:"1–3–5",         n:"C–E–G",        b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"G",t:"n-5th"}],              tip:"Root + 3rd + 5th. Đủ, sáng.",                              tipE:"Root, 3rd, 5th. Complete and bright."},
-    {name:"Cm",     aka:"minor",       f:"1–b3–5",        n:"C–Eb–G",       b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"G",t:"n-5th"}],             tip:"b3 là màu sắc quan trọng nhất.",                           tipE:"b3 is the key color note for minor quality."},
-    {name:"Cdim",   aka:"diminished",  f:"1–b3–b5",       n:"C–Eb–Gb",      b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Gb",t:"n-5th"}],            tip:"b5 rất căng — passing chord.",                             tipE:"b5 is very tense — best used as a passing chord."},
-    {name:"Caug",   aka:"augmented",   f:"1–3–#5",        n:"C–E–G#",       b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"G#",t:"n-5th"}],             tip:"#5 tạo cảm giác trôi nổi.",                                tipE:"#5 creates an unresolved, floating feel."},
-    {name:"Csus2",  aka:"",            f:"1–2–5",         n:"C–D–G",        b:[{n:"C",t:"n-root"},{n:"D",t:"n-tension"},{n:"G",t:"n-5th"}],           tip:"Không 3rd → mơ hồ, hay dùng trong R&B.",                  tipE:"No 3rd → ambiguous quality, very common in R&B."},
-    {name:"Csus4",  aka:"",            f:"1–4–5",         n:"C–F–G",        b:[{n:"C",t:"n-root"},{n:"F",t:"n-tension"},{n:"G",t:"n-5th"}],           tip:"4th thay 3rd — cảm giác lơ lửng.",                        tipE:"4th replaces 3rd — suspended, unresolved feel."},
-    {name:"C5",     aka:"power chord", f:"1–5",           n:"C–G",          b:[{n:"C",t:"n-root"},{n:"G",t:"n-5th"}],                                 tip:"Rock/funk bass — đơn giản, mạnh mẽ.",                     tipE:"Rock/funk staple — simple and powerful."},
-  ]},
-  {group:"Major 7th & biến thể",groupE:"Major 7th & Variations",cat:"maj7",rows:[
-    {name:"Cmaj7",    aka:"",         f:"1–3–5–maj7",      n:"C–E–G–B",      b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"B",t:"n-7th"}],                                          tip:"Shell: Root–3–maj7. B rất sáng.",                         tipE:"Shell: Root–3–maj7. B is bright; favor higher register."},
-    {name:"Cmaj9",    aka:"",         f:"1–3–5–maj7–9",    n:"C–E–G–B–D",    b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"B",t:"n-7th"},{n:"D",t:"n-tension"}],                   tip:"D (9th) thêm vào sau maj7 — rất R&B.",                    tipE:"D (9th) layered over maj7 — classic R&B sound."},
-    {name:"Cmaj13",   aka:"",         f:"1–3–maj7–13",     n:"C–E–B–A",      b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"B",t:"n-7th"},{n:"A",t:"n-tension"}],                   tip:"A (13th) = màu sắc lớp trên.",                            tipE:"A (13th) adds an upper-register color tone."},
-    {name:"Cmaj7#11", aka:"Lydian",   f:"1–3–maj7–#11",    n:"C–E–B–F#",     b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"B",t:"n-7th"},{n:"F#",t:"n-tension"}],                  tip:"#11 = Lydian mode. Phảng phất, mơ mộng.",                 tipE:"#11 = Lydian mode. Dreamy and floating."},
-    {name:"Cmaj7#5",  aka:"",         f:"1–3–#5–maj7",     n:"C–E–G#–B",     b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"G#",t:"n-5th"},{n:"B",t:"n-7th"}],                     tip:"#5 tạo màu augmented trên nền maj7.",                      tipE:"#5 adds augmented color over a maj7 chord."},
-    {name:"C6",       aka:"",         f:"1–3–5–6",         n:"C–E–G–A",      b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"A",t:"n-tension"}],                                      tip:"6th thay 7th — nhẹ hơn, hay cuối câu.",                   tipE:"6th replaces 7th — lighter, great at phrase endings."},
-    {name:"C6/9",     aka:"",         f:"1–3–6–9",         n:"C–E–A–D",      b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"A",t:"n-tension"},{n:"D",t:"n-tension"}],               tip:"Neo-soul, R&B — rất thường gặp.",                         tipE:"Neo-soul and R&B staple."},
-    {name:"Cadd9",    aka:"",         f:"1–3–5–9",         n:"C–E–G–D",      b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"G",t:"n-5th"},{n:"D",t:"n-tension"}],                   tip:"9th không có 7th → trong sáng hơn maj9.",                 tipE:"9th without 7th → cleaner and brighter than maj9."},
-  ]},
-  {group:"Minor 7th & biến thể",groupE:"Minor 7th & Variations",cat:"min7",rows:[
-    {name:"Cm7",      aka:"",         f:"1–b3–5–b7",       n:"C–Eb–G–Bb",    b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Bb",t:"n-7th"}],                                        tip:"Shell: Root–b3–b7. Bộ ba cốt lõi.",                       tipE:"Shell: Root–b3–b7. The essential minor 7 core."},
-    {name:"Cm9",      aka:"",         f:"1–b3–b7–9",       n:"C–Eb–Bb–D",    b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"D",t:"n-tension"}],                 tip:"D (9th) thêm độ mềm, R&B jazz.",                          tipE:"D (9th) adds softness — very jazz/R&B."},
-    {name:"Cm11",     aka:"",         f:"1–b3–b7–11",      n:"C–Eb–Bb–F",    b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"F",t:"n-tension"}],                 tip:"F (11th) = không gian, lơ lửng.",                         tipE:"F (11th) = space and suspension."},
-    {name:"Cm13",     aka:"",         f:"1–b3–b7–13",      n:"C–Eb–Bb–A",    b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"A",t:"n-tension"}],                 tip:"A (natural 13) trên minor — tinh tế.",                    tipE:"A (natural 13) over minor — subtle and refined."},
-    {name:"Cm6",      aka:"",         f:"1–b3–5–6",        n:"C–Eb–G–A",     b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"A",t:"n-tension"}],                                     tip:"A (major 6) trên minor — rất đẹp.",                       tipE:"A (major 6) over minor — beautiful, melancholic."},
-    {name:"Cm6/9",    aka:"",         f:"1–b3–6–9",        n:"C–Eb–A–D",     b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"A",t:"n-tension"},{n:"D",t:"n-tension"}],              tip:"Đặc trưng neo-soul, D'Angelo style.",                     tipE:"Neo-soul staple — D'Angelo signature sound."},
-    {name:"CmMaj7",   aka:"Cm(maj7)",f:"1–b3–5–maj7",     n:"C–Eb–G–B",     b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"B",t:"n-7th"}],                                        tip:"Rất căng thẳng — hay dùng trong nhạc film.",              tipE:"Very tense and dramatic — common in film scores."},
-    {name:"Cmadd9",   aka:"",         f:"1–b3–5–9",        n:"C–Eb–G–D",     b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"D",t:"n-tension"}],                                    tip:"Màu minor nhưng mở hơn nhờ 9th.",                         tipE:"Minor color lifted slightly by the 9th."},
-    {name:"Cmø / Cm7b5",aka:"Half-dim",f:"1–b3–b5–b7",   n:"C–Eb–Gb–Bb",   b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Gb",t:"n-5th"},{n:"Bb",t:"n-7th"}],                   tip:"iim7b5 trong minor key. b5 quan trọng.",                  tipE:"iim7b5 in minor key. The b5 is essential."},
-  ]},
-  {group:"Dominant 7th",groupE:"Dominant 7th",cat:"dom7",rows:[
-    {name:"C7",       aka:"dom 7th",  f:"1–3–5–b7",        n:"C–E–G–Bb",     b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"}],                                        tip:"Shell: Root–3–b7. Dominant rõ nhất.",                     tipE:"Shell: Root–3–b7. Clearest dominant statement."},
-    {name:"C9",       aka:"",         f:"1–3–b7–9",        n:"C–E–Bb–D",     b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"D",t:"n-tension"}],                 tip:"D thêm màu R&B — rất phổ biến trong funk.",               tipE:"D adds R&B/funk color — extremely common."},
-    {name:"C13",      aka:"",         f:"1–3–b7–13",       n:"C–E–Bb–A",     b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"A",t:"n-tension"}],                 tip:"A (13th) = full, âm ấm, V13 thông dụng.",                 tipE:"A (13th) = full, warm dominant sound."},
-    {name:"C7sus4",   aka:"",         f:"1–4–5–b7",        n:"C–F–G–Bb",     b:[{n:"C",t:"n-root"},{n:"F",t:"n-tension"},{n:"Bb",t:"n-7th"}],                                    tip:"F thay E — không resolve ngay, rất R&B.",                 tipE:"F replaces E — unresolved dominant, very R&B."},
-    {name:"C9sus4",   aka:"",         f:"1–4–b7–9",        n:"C–F–Bb–D",     b:[{n:"C",t:"n-root"},{n:"F",t:"n-tension"},{n:"Bb",t:"n-7th"},{n:"D",t:"n-tension"}],             tip:"Rất R&B — D'Angelo, Stevie Wonder.",                      tipE:"Very R&B — D'Angelo and Stevie Wonder hallmark."},
-    {name:"Cdim7",    aka:"fully dim",f:"1–b3–b5–bb7",     n:"C–Eb–Gb–A",    b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Gb",t:"n-5th"},{n:"A",t:"n-7th"}],                   tip:"Symmetrical — hay dùng làm passing chord.",               tipE:"Symmetrical — excellent as a passing chord."},
-  ]},
-  {group:"Altered Dominant — chơi trên V7",groupE:"Altered Dominant — use over V7",cat:"alt",rows:[
-    {name:"C7b9",    aka:"",          f:"1–3–b7–b9",       n:"C–E–Bb–Db",    b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"Db",t:"n-tension"}],                tip:"Db (b9) rất căng — giải quyết mạnh về tonic.",           tipE:"Db (b9) = strong pull toward tonic resolution."},
-    {name:"C7#9",    aka:"Hendrix",   f:"1–3–b7–#9",       n:"C–E–Bb–D#",    b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"D#",t:"n-tension"}],                tip:"#9 = linh hồn R&B/funk.",                                tipE:"#9 = the soul of R&B and funk."},
-    {name:"C7b13",   aka:"C7#5",      f:"1–3–b7–b13",      n:"C–E–Bb–Ab",    b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"Ab",t:"n-tension"}],                tip:"Ab (b13) = altered tone hay nhất cho bass lick.",         tipE:"Ab (b13) = the most useful altered tone for bass licks."},
-    {name:"C7#11",   aka:"Lydian dom",f:"1–3–b7–#11",      n:"C–E–Bb–F#",    b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"F#",t:"n-tension"}],                tip:"F# = Lydian dominant = Bb melodic minor bậc 4.",          tipE:"F# = Lydian dominant; from Bb melodic minor."},
-    {name:"C13b9",   aka:"",          f:"1–3–b7–b9–13",    n:"C–E–Bb–Db–A",  b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"Db",t:"n-tension"}],                tip:"b9 và 13 — jazz rất đặc trưng.",                         tipE:"Combines b9 and 13 — classic jazz tension."},
-    {name:"C7#9b13", aka:"C7alt",     f:"1–3–b7–#9–b13",   n:"C–E–Bb–D#–Ab", b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"D#",t:"n-tension"}],               tip:"Full altered — từ C altered scale. Căng nhất.",           tipE:"Full altered dominant — maximum tension."},
-    {name:"C7b9b13", aka:"",          f:"1–3–b7–b9–b13",   n:"C–E–Bb–Db–Ab", b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"Db",t:"n-tension"}],               tip:"b9+b13 = Spanish Phrygian vibe.",                        tipE:"b9+b13 = Spanish Phrygian vibe."},
-  ]},
-  {group:"Extended chords",groupE:"Extended Chords",cat:"ext",rows:[
-    {name:"Cmaj7#11",aka:"Lydian",    f:"1–3–maj7–#11",    n:"C–E–B–F#",     b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"B",t:"n-7th"},{n:"F#",t:"n-tension"}],                  tip:"#11 = jazz hiện đại.",                                   tipE:"#11 = modern jazz sound."},
-    {name:"Cm11",    aka:"",          f:"1–b3–b7–11",      n:"C–Eb–Bb–F",    b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"F",t:"n-tension"}],                 tip:"F (11th) rất hay trong neo-soul.",                       tipE:"F (11th) very effective in neo-soul."},
-    {name:"C11",     aka:"dom 11",    f:"1–(3)–b7–11",     n:"C–Bb–F",       b:[{n:"C",t:"n-root"},{n:"Bb",t:"n-7th"},{n:"F",t:"n-tension"}],                                    tip:"3rd thường bỏ — F và Bb đủ xác định.",                   tipE:"3rd usually omitted — F and b7 define it."},
-    {name:"C13#11",  aka:"",          f:"1–3–b7–#11–13",   n:"C–E–Bb–F#–A",  b:[{n:"C",t:"n-root"},{n:"E",t:"n-3rd"},{n:"Bb",t:"n-7th"},{n:"F#",t:"n-tension"}],                tip:"Jazz fusion, Herbie Hancock style.",                     tipE:"Jazz fusion — Herbie Hancock signature."},
-  ]},
-  {group:"Slash & đảo vị",groupE:"Slash & Inversions",cat:"other",rows:[
-    {name:"C/E",     aka:"1st inv.",  f:"E bass",           n:"E–C–E–G",      b:[{n:"E",t:"n-3rd"},{n:"C",t:"n-root"},{n:"G",t:"n-5th"}],                                         tip:"Bass chơi E (3rd) — chuyển động êm.",                    tipE:"Bass plays E (3rd) — smooth voice leading."},
-    {name:"C/G",     aka:"2nd inv.",  f:"G bass",           n:"G–C–E–G",      b:[{n:"G",t:"n-5th"},{n:"C",t:"n-root"},{n:"E",t:"n-3rd"}],                                         tip:"Bass chơi G — đỡ hơn root.",                             tipE:"Bass plays G (5th) — supportive below root."},
-    {name:"Cdim7",   aka:"C°7",       f:"1–b3–b5–bb7",     n:"C–Eb–Gb–A",    b:[{n:"C",t:"n-root"},{n:"Eb",t:"n-3rd"},{n:"Gb",t:"n-5th"},{n:"A",t:"n-7th"}],                   tip:"Passing chord giữa hai diatonic chord.",                 tipE:"Passing chord between two diatonic chords."},
-  ]},
-];
+      // Semitone of an interval note (for fret calculation)
+      function iSemi(key, deg, acc) {
+        return N2S[iNote(key, deg, acc)];
+      }
 
-// ── State ──────────────────────────────────────────────────────────────────
-let curKey='C', curOff=0, curFilter='all', curTab='vie';
+      // Transpose chord ROOT name (e.g. "Cm7" → "Gm7")
+      // Uses correct enharmonic for the root based on key
+      function tChordName(name, key) {
+        if (name.includes(" / "))
+          return name
+            .split(" / ")
+            .map((p) => tChordName(p, key))
+            .join(" / ");
+        const m = name.match(/^([A-G][#b]?)(.*)/);
+        if (!m) return name;
+        const oldRoot = m[1],
+          quality = m[2];
+        // Find which key this chord was originally in (C) and transpose
+        // The new root IS the key name for the tonic chord; for others derive from interval
+        // Simple approach: root = tNote by semitone using key's flat/sharp convention
+        const FLAT_K = new Set(["F", "Bb", "Eb", "Ab", "Db", "Gb"]);
+        const names = FLAT_K.has(key)
+          ? FL
+          : ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        const semi = N2S[oldRoot];
+        if (semi === undefined) return name;
+        return names[(((semi + N2S[key || "C"]) % 12) + 12) % 12] + quality;
+      }
 
-// ── Key selector ───────────────────────────────────────────────────────────
-const KEYS=[{l:'C',s:0},{l:'Db',s:1},{l:'D',s:2},{l:'Eb',s:3},{l:'E',s:4},{l:'F',s:5},{l:'F#',s:6},{l:'G',s:7},{l:'Ab',s:8},{l:'A',s:9},{l:'Bb',s:10},{l:'B',s:11}];
-const keyEl=document.getElementById('keySelector');
-KEYS.forEach(k=>{
-  const b=document.createElement('button');
-  b.className='key-btn'+((/[#b]/).test(k.l)?' acc':'');
-  b.textContent=k.l; if(k.l==='C')b.classList.add('active');
-  b.onclick=()=>{keyEl.querySelectorAll('.key-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');curKey=k.l;curOff=k.s;render()};
-  keyEl.appendChild(b);
-});
+      // Render all-notes string from ni array
+      function renderNi(ni, key) {
+        return ni.map(([d, a]) => iNote(key, d, a)).join("–");
+      }
 
-// ── Tab bar ────────────────────────────────────────────────────────────────
-const FILTERS_VIE=[{l:'Tất cả',c:'all'},{l:'Triads',c:'triad'},{l:'Major 7th',c:'maj7'},{l:'Minor 7th',c:'min7'},{l:'Dominant',c:'dom7'},{l:'Altered',c:'alt'},{l:'Extended',c:'ext'},{l:'Slash',c:'other'}];
-const FILTERS_ENG=[{l:'All',c:'all'},{l:'Triads',c:'triad'},{l:'Maj 7th',c:'maj7'},{l:'Min 7th',c:'min7'},{l:'Dominant',c:'dom7'},{l:'Altered',c:'alt'},{l:'Extended',c:'ext'},{l:'Slash',c:'other'}];
+      // ── Chord Data ─────────────────────────────────────────────────────────────
+      // b entries: {i:[degree, accidental], t:'n-xxx'}
+      // ni: [[degree, accidental], ...] for all chord tones
+      const DATA = [
+        {
+          group: "Triads",
+          groupE: "Triads",
+          cat: "triad",
+          rows: [
+            {
+              name: "C",
+              aka: "major",
+              f: "1–3–5",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [5, ""], t: "n-5th" },
+              ],
+              tip: "Root + 3rd + 5th. Đủ, sáng.",
+              tipE: "Root, 3rd, 5th. Complete and bright.",
+            },
+            {
+              name: "Cm",
+              aka: "minor",
+              f: "1–b3–5",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [5, ""], t: "n-5th" },
+              ],
+              tip: "b3 là màu sắc quan trọng nhất.",
+              tipE: "b3 is the key color note for minor.",
+            },
+            {
+              name: "Cdim",
+              aka: "diminished",
+              f: "1–b3–b5",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [5, "b"], t: "n-5th" },
+              ],
+              tip: "b5 rất căng — passing chord.",
+              tipE: "b5 is very tense — best as a passing chord.",
+            },
+            {
+              name: "Caug",
+              aka: "augmented",
+              f: "1–3–#5",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, "#"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [5, "#"], t: "n-5th" },
+              ],
+              tip: "#5 tạo cảm giác trôi nổi.",
+              tipE: "#5 creates an unresolved, floating feel.",
+            },
+            {
+              name: "Csus2",
+              aka: "",
+              f: "1–2–5",
+              ni: [
+                [1, ""],
+                [2, ""],
+                [5, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [2, ""], t: "n-tension" },
+                { i: [5, ""], t: "n-5th" },
+              ],
+              tip: "Không 3rd → mơ hồ, hay dùng trong R&B.",
+              tipE: "No 3rd → ambiguous quality, common in R&B.",
+            },
+            {
+              name: "Csus4",
+              aka: "",
+              f: "1–4–5",
+              ni: [
+                [1, ""],
+                [4, ""],
+                [5, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [4, ""], t: "n-tension" },
+                { i: [5, ""], t: "n-5th" },
+              ],
+              tip: "4th thay 3rd — cảm giác lơ lửng.",
+              tipE: "4th replaces 3rd — suspended feel.",
+            },
+            {
+              name: "C5",
+              aka: "power chord",
+              f: "1–5",
+              ni: [
+                [1, ""],
+                [5, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [5, ""], t: "n-5th" },
+              ],
+              tip: "Rock/funk bass — đơn giản, mạnh mẽ.",
+              tipE: "Rock/funk staple — simple and powerful.",
+            },
+          ],
+        },
+        {
+          group: "Major 7th & biến thể",
+          groupE: "Major 7th & Variations",
+          cat: "maj7",
+          rows: [
+            {
+              name: "Cmaj7",
+              aka: "",
+              f: "1–3–5–maj7",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, ""],
+                [7, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, ""], t: "n-7th" },
+              ],
+              tip: "Shell: Root–3–maj7. B rất sáng.",
+              tipE: "Shell: Root–3–maj7. Maj7 is bright; use higher register.",
+            },
+            {
+              name: "Cmaj9",
+              aka: "",
+              f: "1–3–5–maj7–9",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, ""],
+                [7, ""],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, ""], t: "n-7th" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "D (9th) thêm vào sau maj7 — rất R&B.",
+              tipE: "9th layered over maj7 — classic R&B sound.",
+            },
+            {
+              name: "Cmaj13",
+              aka: "",
+              f: "1–3–maj7–13",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, ""],
+                [6, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, ""], t: "n-7th" },
+                { i: [6, ""], t: "n-tension" },
+              ],
+              tip: "13th = màu sắc lớp trên.",
+              tipE: "13th adds an upper-register color tone.",
+            },
+            {
+              name: "Cmaj7#11",
+              aka: "Lydian",
+              f: "1–3–maj7–#11",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, ""],
+                [4, "#"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, ""], t: "n-7th" },
+                { i: [4, "#"], t: "n-tension" },
+              ],
+              tip: "#11 = Lydian mode. Phảng phất, mơ mộng.",
+              tipE: "#11 = Lydian mode. Dreamy and floating.",
+            },
+            {
+              name: "Cmaj7#5",
+              aka: "",
+              f: "1–3–#5–maj7",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, "#"],
+                [7, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [5, "#"], t: "n-5th" },
+                { i: [7, ""], t: "n-7th" },
+              ],
+              tip: "#5 tạo màu augmented trên nền maj7.",
+              tipE: "#5 adds augmented color over maj7.",
+            },
+            {
+              name: "C6",
+              aka: "",
+              f: "1–3–5–6",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, ""],
+                [6, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [6, ""], t: "n-tension" },
+              ],
+              tip: "6th thay 7th — nhẹ hơn, hay cuối câu.",
+              tipE: "6th replaces 7th — lighter, great at phrase endings.",
+            },
+            {
+              name: "C6/9",
+              aka: "",
+              f: "1–3–6–9",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [6, ""],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [6, ""], t: "n-tension" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "Neo-soul, R&B — rất thường gặp.",
+              tipE: "Neo-soul and R&B staple.",
+            },
+            {
+              name: "Cadd9",
+              aka: "",
+              f: "1–3–5–9",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, ""],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [5, ""], t: "n-5th" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "9th không có 7th → trong sáng hơn maj9.",
+              tipE: "9th without 7th → cleaner than maj9.",
+            },
+          ],
+        },
+        {
+          group: "Minor 7th & biến thể",
+          groupE: "Minor 7th & Variations",
+          cat: "min7",
+          rows: [
+            {
+              name: "Cm7",
+              aka: "",
+              f: "1–b3–5–b7",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, ""],
+                [7, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+              ],
+              tip: "Shell: Root–b3–b7. Bộ ba cốt lõi.",
+              tipE: "Shell: Root–b3–b7. The essential minor 7 core.",
+            },
+            {
+              name: "Cm9",
+              aka: "",
+              f: "1–b3–b7–9",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [7, "b"],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "9th thêm độ mềm, R&B jazz.",
+              tipE: "9th adds softness — very jazz/R&B.",
+            },
+            {
+              name: "Cm11",
+              aka: "",
+              f: "1–b3–b7–11",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [7, "b"],
+                [4, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [4, ""], t: "n-tension" },
+              ],
+              tip: "11th = không gian, lơ lửng.",
+              tipE: "11th = space and suspension.",
+            },
+            {
+              name: "Cm13",
+              aka: "",
+              f: "1–b3–b7–13",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [7, "b"],
+                [6, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [6, ""], t: "n-tension" },
+              ],
+              tip: "Natural 13 trên minor — tinh tế.",
+              tipE: "Natural 13 over minor — subtle and refined.",
+            },
+            {
+              name: "Cm6",
+              aka: "",
+              f: "1–b3–5–6",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, ""],
+                [6, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [6, ""], t: "n-tension" },
+              ],
+              tip: "Major 6 trên minor — rất đẹp.",
+              tipE: "Major 6 over minor — beautiful, melancholic.",
+            },
+            {
+              name: "Cm6/9",
+              aka: "",
+              f: "1–b3–6–9",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [6, ""],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [6, ""], t: "n-tension" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "Đặc trưng neo-soul, D'Angelo style.",
+              tipE: "Neo-soul staple — D'Angelo signature.",
+            },
+            {
+              name: "CmMaj7",
+              aka: "Cm(maj7)",
+              f: "1–b3–5–maj7",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, ""],
+                [7, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [7, ""], t: "n-7th" },
+              ],
+              tip: "Rất căng thẳng — hay dùng trong nhạc film.",
+              tipE: "Very tense and dramatic — common in film scores.",
+            },
+            {
+              name: "Cmadd9",
+              aka: "",
+              f: "1–b3–5–9",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, ""],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "Màu minor nhưng mở hơn nhờ 9th.",
+              tipE: "Minor color lifted slightly by the 9th.",
+            },
+            {
+              name: "Cmø / Cm7b5",
+              aka: "Half-dim",
+              f: "1–b3–b5–b7",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, "b"],
+                [7, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [5, "b"], t: "n-5th" },
+                { i: [7, "b"], t: "n-7th" },
+              ],
+              tip: "iim7b5 trong minor key. b5 quan trọng.",
+              tipE: "iim7b5 in minor key. The b5 is essential.",
+            },
+          ],
+        },
+        {
+          group: "Dominant 7th",
+          groupE: "Dominant 7th",
+          cat: "dom7",
+          rows: [
+            {
+              name: "C7",
+              aka: "dom 7th",
+              f: "1–3–5–b7",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [5, ""],
+                [7, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+              ],
+              tip: "Shell: Root–3–b7. Dominant rõ nhất.",
+              tipE: "Shell: Root–3–b7. Clearest dominant statement.",
+            },
+            {
+              name: "C9",
+              aka: "",
+              f: "1–3–b7–9",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "9th thêm màu R&B — rất phổ biến trong funk.",
+              tipE: "9th adds R&B/funk color — extremely common.",
+            },
+            {
+              name: "C13",
+              aka: "",
+              f: "1–3–b7–13",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [6, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [6, ""], t: "n-tension" },
+              ],
+              tip: "13th = full, âm ấm, V13 thông dụng.",
+              tipE: "13th = full, warm dominant sound.",
+            },
+            {
+              name: "C7sus4",
+              aka: "",
+              f: "1–4–5–b7",
+              ni: [
+                [1, ""],
+                [4, ""],
+                [5, ""],
+                [7, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [4, ""], t: "n-tension" },
+                { i: [7, "b"], t: "n-7th" },
+              ],
+              tip: "4th thay 3rd — không resolve ngay, rất R&B.",
+              tipE: "4th replaces 3rd — unresolved dominant, very R&B.",
+            },
+            {
+              name: "C9sus4",
+              aka: "",
+              f: "1–4–b7–9",
+              ni: [
+                [1, ""],
+                [4, ""],
+                [7, "b"],
+                [2, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [4, ""], t: "n-tension" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, ""], t: "n-tension" },
+              ],
+              tip: "Rất R&B — D'Angelo, Stevie Wonder.",
+              tipE: "Very R&B — D'Angelo and Stevie Wonder hallmark.",
+            },
+            {
+              name: "Cdim7",
+              aka: "fully dim",
+              f: "1–b3–b5–bb7",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, "b"],
+                [7, "bb"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [5, "b"], t: "n-5th" },
+                { i: [7, "bb"], t: "n-7th" },
+              ],
+              tip: "Symmetrical — hay dùng làm passing chord.",
+              tipE: "Symmetrical — excellent as a passing chord.",
+            },
+          ],
+        },
+        {
+          group: "Altered Dominant — chơi trên V7",
+          groupE: "Altered Dominant — use over V7",
+          cat: "alt",
+          rows: [
+            {
+              name: "C7b9",
+              aka: "",
+              f: "1–3–b7–b9",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [2, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, "b"], t: "n-tension" },
+              ],
+              tip: "b9 rất căng — giải quyết mạnh về tonic.",
+              tipE: "b9 = strong pull toward tonic resolution.",
+            },
+            {
+              name: "C7#9",
+              aka: "Hendrix",
+              f: "1–3–b7–#9",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [2, "#"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, "#"], t: "n-tension" },
+              ],
+              tip: "#9 = linh hồn R&B/funk.",
+              tipE: "#9 = the soul of R&B and funk.",
+            },
+            {
+              name: "C7b13",
+              aka: "C7#5",
+              f: "1–3–b7–b13",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [6, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [6, "b"], t: "n-tension" },
+              ],
+              tip: "b13 = altered tone hay nhất cho bass lick.",
+              tipE: "b13 = the most useful altered tone for bass licks.",
+            },
+            {
+              name: "C7#11",
+              aka: "Lydian dom",
+              f: "1–3–b7–#11",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [4, "#"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [4, "#"], t: "n-tension" },
+              ],
+              tip: "#11 = Lydian dominant = Bb melodic minor bậc 4.",
+              tipE: "#11 = Lydian dominant; from Bb melodic minor.",
+            },
+            {
+              name: "C13b9",
+              aka: "",
+              f: "1–3–b7–b9–13",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [2, "b"],
+                [6, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, "b"], t: "n-tension" },
+              ],
+              tip: "b9 và 13 — jazz rất đặc trưng.",
+              tipE: "Combines b9 and 13 — classic jazz tension.",
+            },
+            {
+              name: "C7#9b13",
+              aka: "C7alt",
+              f: "1–3–b7–#9–b13",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [2, "#"],
+                [6, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, "#"], t: "n-tension" },
+              ],
+              tip: "Full altered — từ altered scale. Căng nhất.",
+              tipE: "Full altered dominant — maximum tension.",
+            },
+            {
+              name: "C7b9b13",
+              aka: "",
+              f: "1–3–b7–b9–b13",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [2, "b"],
+                [6, "b"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [2, "b"], t: "n-tension" },
+              ],
+              tip: "b9+b13 = Spanish Phrygian vibe.",
+              tipE: "b9+b13 = Spanish Phrygian vibe.",
+            },
+          ],
+        },
+        {
+          group: "Extended chords",
+          groupE: "Extended Chords",
+          cat: "ext",
+          rows: [
+            {
+              name: "Cmaj7#11",
+              aka: "Lydian",
+              f: "1–3–maj7–#11",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, ""],
+                [4, "#"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, ""], t: "n-7th" },
+                { i: [4, "#"], t: "n-tension" },
+              ],
+              tip: "#11 = jazz hiện đại.",
+              tipE: "#11 = modern jazz sound.",
+            },
+            {
+              name: "Cm11",
+              aka: "",
+              f: "1–b3–b7–11",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [7, "b"],
+                [4, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [4, ""], t: "n-tension" },
+              ],
+              tip: "11th rất hay trong neo-soul.",
+              tipE: "11th very effective in neo-soul.",
+            },
+            {
+              name: "C11",
+              aka: "dom 11",
+              f: "1–(3)–b7–11",
+              ni: [
+                [1, ""],
+                [7, "b"],
+                [4, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [4, ""], t: "n-tension" },
+              ],
+              tip: "3rd thường bỏ — 4th và b7 đủ xác định.",
+              tipE: "3rd usually omitted — 4th and b7 define it.",
+            },
+            {
+              name: "C13#11",
+              aka: "",
+              f: "1–3–b7–#11–13",
+              ni: [
+                [1, ""],
+                [3, ""],
+                [7, "b"],
+                [4, "#"],
+                [6, ""],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+                { i: [7, "b"], t: "n-7th" },
+                { i: [4, "#"], t: "n-tension" },
+              ],
+              tip: "Jazz fusion, Herbie Hancock style.",
+              tipE: "Jazz fusion — Herbie Hancock signature.",
+            },
+          ],
+        },
+        {
+          group: "Slash & đảo vị",
+          groupE: "Slash & Inversions",
+          cat: "other",
+          rows: [
+            {
+              name: "C/E",
+              aka: "1st inv.",
+              f: "E bass",
+              ni: [
+                [3, ""],
+                [1, ""],
+                [3, ""],
+                [5, ""],
+              ],
+              b: [
+                { i: [3, ""], t: "n-3rd" },
+                { i: [1, ""], t: "n-root" },
+                { i: [5, ""], t: "n-5th" },
+              ],
+              tip: "Bass chơi 3rd — chuyển động êm.",
+              tipE: "Bass plays 3rd — smooth voice leading.",
+            },
+            {
+              name: "C/G",
+              aka: "2nd inv.",
+              f: "G bass",
+              ni: [
+                [5, ""],
+                [1, ""],
+                [3, ""],
+                [5, ""],
+              ],
+              b: [
+                { i: [5, ""], t: "n-5th" },
+                { i: [1, ""], t: "n-root" },
+                { i: [3, ""], t: "n-3rd" },
+              ],
+              tip: "Bass chơi 5th — đỡ hơn root.",
+              tipE: "Bass plays 5th — supportive below root.",
+            },
+            {
+              name: "Cdim7",
+              aka: "C°7",
+              f: "1–b3–b5–bb7",
+              ni: [
+                [1, ""],
+                [3, "b"],
+                [5, "b"],
+                [7, "bb"],
+              ],
+              b: [
+                { i: [1, ""], t: "n-root" },
+                { i: [3, "b"], t: "n-3rd" },
+                { i: [5, "b"], t: "n-5th" },
+                { i: [7, "bb"], t: "n-7th" },
+              ],
+              tip: "Passing chord giữa hai diatonic chord.",
+              tipE: "Passing chord between two diatonic chords.",
+            },
+          ],
+        },
+      ];
 
-document.getElementById('tabBar').addEventListener('click',e=>{
-  const b=e.target.closest('.tab-btn'); if(!b) return;
-  document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); curTab=b.dataset.tab; buildFilters(); render();
-});
+      // ── State & keys ───────────────────────────────────────────────────────────
+      let curKey = "C",
+        curFilter = "all",
+        curTab = "vie";
+      const KEYS = [
+        { l: "C", k: "C" },
+        { l: "Db", k: "Db" },
+        { l: "D", k: "D" },
+        { l: "Eb", k: "Eb" },
+        { l: "E", k: "E" },
+        { l: "F", k: "F" },
+        { l: "F#", k: "F#" },
+        { l: "G", k: "G" },
+        { l: "Ab", k: "Ab" },
+        { l: "A", k: "A" },
+        { l: "Bb", k: "Bb" },
+        { l: "B", k: "B" },
+      ];
 
-function buildFilters(){
-  const fbar=document.getElementById('filterBar');
-  fbar.innerHTML='';
-  const filters=curTab==='eng'?FILTERS_ENG:FILTERS_VIE;
-  filters.forEach(f=>{
-    const b=document.createElement('button');
-    b.className='fbtn'+(f.c===curFilter?' active':'');
-    b.textContent=f.l; b.dataset.cat=f.c;
-    b.onclick=()=>{fbar.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');curFilter=f.c;render()};
-    fbar.appendChild(b);
-  });
-  document.getElementById('fltLbl').textContent=curTab==='eng'?'Group:':'Nhóm:';
-}
+      // Build key selector
+      const keyEl = document.getElementById("keySelector");
+      KEYS.forEach((k) => {
+        const b = document.createElement("button");
+        b.className = "key-btn" + (/[#b]/.test(k.l) ? " acc" : "");
+        b.textContent = k.l;
+        if (k.l === "C") b.classList.add("active");
+        b.onclick = () => {
+          keyEl
+            .querySelectorAll(".key-btn")
+            .forEach((x) => x.classList.remove("active"));
+          b.classList.add("active");
+          curKey = k.k;
+          render();
+        };
+        keyEl.appendChild(b);
+      });
 
-function buildLegend(){
-  const isE=curTab==='eng';
-  const items=isE?[
-    {c:'#378ADD',l:'Root (required)'},
-    {c:'#639922',l:'3rd / b3 (quality)'},
-    {c:'#BA7517',l:'7th / b7 / maj7 (color)'},
-    {c:'#7F77DD',l:'Tension (9, 11, 13, alt)'},
-    {c:'#888780',l:'5th (neutral)'},
-  ]:[
-    {c:'#378ADD',l:'Root (bắt buộc)'},
-    {c:'#639922',l:'3rd / b3 (chất chord)'},
-    {c:'#BA7517',l:'7th / b7 / maj7 (màu)'},
-    {c:'#7F77DD',l:'Tension (9, 11, 13, alt)'},
-    {c:'#888780',l:'5th (trung tính)'},
-  ];
-  document.getElementById('legend').innerHTML=items.map(i=>`<div class="leg-item"><div class="leg-dot" style="background:${i.c}"></div>${i.l}</div>`).join('');
-}
+      // Tab switching
+      document.getElementById("tabBar").addEventListener("click", (e) => {
+        const b = e.target.closest(".tab-btn");
+        if (!b) return;
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        curTab = b.dataset.tab;
+        buildFilters();
+        render();
+      });
 
-// ── Render table (VIE / ENG) ───────────────────────────────────────────────
-function renderTable(lang){
-  const groups=curFilter==='all'?DATA:DATA.filter(g=>g.cat===curFilter);
-  const total=groups.reduce((s,g)=>s+g.rows.length,0);
-  document.getElementById('badge').textContent=total+(lang==='eng'?' chords':' hợp âm');
-  let html='';
-  groups.forEach(g=>{
-    const gname=lang==='eng'?g.groupE:g.group;
-    html+=`<div class="group-block"><div class="group-label">${gname}<span class="grp-cnt">(${g.rows.length})</span></div>
-    <table class="ctable">
-      <thead><tr>
-        <th style="width:105px">${lang==='eng'?'Chord':'Hợp âm'}</th>
-        <th style="width:125px">${lang==='eng'?'Formula':'Công thức'}</th>
-        <th>${lang==='eng'?'All notes':'Tất cả notes'}</th>
-        <th style="width:200px">${lang==='eng'?'3–4 bass notes':'3–4 notes cho bass'}</th>
-        <th>${lang==='eng'?'Notes':'Ghi chú'}</th>
-      </tr></thead><tbody>`;
-    g.rows.forEach(r=>{
-      const cn=tChord(r.name,curOff,curKey);
-      const ns=tNoteStr(r.n,curOff,curKey);
-      const ps=r.b.map(b=>`<span class="pill ${b.t}">${tNote(b.n,curOff,curKey)}</span>`).join('');
-      const tip=lang==='eng'?r.tipE:r.tip;
-      html+=`<tr>
-        <td><div class="cname">${cn}</div>${r.aka?`<div class="caka">${r.aka}</div>`:''}</td>
+      // Filters
+      const FILTERS_VIE = [
+        { l: "Tất cả", c: "all" },
+        { l: "Triads", c: "triad" },
+        { l: "Major 7th", c: "maj7" },
+        { l: "Minor 7th", c: "min7" },
+        { l: "Dominant", c: "dom7" },
+        { l: "Altered", c: "alt" },
+        { l: "Extended", c: "ext" },
+        { l: "Slash", c: "other" },
+      ];
+      const FILTERS_ENG = [
+        { l: "All", c: "all" },
+        { l: "Triads", c: "triad" },
+        { l: "Maj 7th", c: "maj7" },
+        { l: "Min 7th", c: "min7" },
+        { l: "Dominant", c: "dom7" },
+        { l: "Altered", c: "alt" },
+        { l: "Extended", c: "ext" },
+        { l: "Slash", c: "other" },
+      ];
+
+      function buildFilters() {
+        const fbar = document.getElementById("filterBar");
+        fbar.innerHTML = "";
+        const filters = curTab === "eng" ? FILTERS_ENG : FILTERS_VIE;
+        filters.forEach((f) => {
+          const b = document.createElement("button");
+          b.className = "fbtn" + (f.c === curFilter ? " active" : "");
+          b.textContent = f.l;
+          b.dataset.cat = f.c;
+          b.onclick = () => {
+            fbar
+              .querySelectorAll(".fbtn")
+              .forEach((x) => x.classList.remove("active"));
+            b.classList.add("active");
+            curFilter = f.c;
+            render();
+          };
+          fbar.appendChild(b);
+        });
+        document.getElementById("fltLbl").textContent =
+          curTab === "eng" ? "Group:" : "Nhóm:";
+      }
+
+      function buildLegend() {
+        const isE = curTab === "eng";
+        const items = isE
+          ? [
+              { c: "#378ADD", l: "Root (required)" },
+              { c: "#639922", l: "3rd / b3 (quality)" },
+              { c: "#BA7517", l: "7th / b7 / maj7 (color)" },
+              { c: "#7F77DD", l: "Tension (9, 11, 13, alt)" },
+              { c: "#888780", l: "5th (neutral)" },
+            ]
+          : [
+              { c: "#378ADD", l: "Root (bắt buộc)" },
+              { c: "#639922", l: "3rd / b3 (chất chord)" },
+              { c: "#BA7517", l: "7th / b7 / maj7 (màu)" },
+              { c: "#7F77DD", l: "Tension (9, 11, 13, alt)" },
+              { c: "#888780", l: "5th (trung tính)" },
+            ];
+        document.getElementById("legend").innerHTML = items
+          .map(
+            (i) =>
+              `<div class="leg-item"><div class="leg-dot" style="background:${i.c}"></div>${i.l}</div>`,
+          )
+          .join("");
+      }
+
+      // ── Get filtered groups ────────────────────────────────────────────────────
+      function groups() {
+        return curFilter === "all"
+          ? DATA
+          : DATA.filter((g) => g.cat === curFilter);
+      }
+
+      // ── Chord name transposition (root only, using correct key convention) ──────
+      function tChord(name, key) {
+        if (name.includes(" / "))
+          return name
+            .split(" / ")
+            .map((p) => tChord(p, key))
+            .join(" / ");
+        const m = name.match(/^([A-G][#b]?)(.*)/);
+        if (!m) return name;
+        const FLAT_K = new Set(["F", "Bb", "Eb", "Ab", "Db", "Gb"]);
+        const names = FLAT_K.has(key)
+          ? FL
+          : ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        // offset from C
+        const rootSemi = N2S[m[1]];
+        const keySemi = N2S[key];
+        return names[(((rootSemi + keySemi) % 12) + 12) % 12] + m[2];
+      }
+
+      // ── Render: VIE / ENG table ────────────────────────────────────────────────
+      function renderTable(lang) {
+        const gs = groups();
+        const total = gs.reduce((s, g) => s + g.rows.length, 0);
+        document.getElementById("badge").textContent =
+          total + (lang === "eng" ? " chords" : " hợp âm");
+        let html = "";
+        gs.forEach((g) => {
+          const gname = lang === "eng" ? g.groupE : g.group;
+          html += `<div class="group-block"><div class="group-label">${gname}<span class="grp-cnt">(${g.rows.length})</span></div>
+    <table class="ctable"><thead><tr>
+      <th style="width:105px">${lang === "eng" ? "Chord" : "Hợp âm"}</th>
+      <th style="width:125px">${lang === "eng" ? "Formula" : "Công thức"}</th>
+      <th>${lang === "eng" ? "All notes" : "Tất cả notes"}</th>
+      <th style="width:200px">${lang === "eng" ? "3–4 bass notes" : "3–4 notes cho bass"}</th>
+      <th>${lang === "eng" ? "Notes" : "Ghi chú"}</th>
+    </tr></thead><tbody>`;
+          g.rows.forEach((r) => {
+            const cn = tChord(r.name, curKey);
+            const ns = renderNi(r.ni, curKey);
+            const ps = r.b
+              .map(
+                (b) =>
+                  `<span class="pill ${b.t}">${iNote(curKey, b.i[0], b.i[1])}</span>`,
+              )
+              .join("");
+            const tip = lang === "eng" ? r.tipE : r.tip;
+            html += `<tr>
+        <td><div class="cname">${cn}</div>${r.aka ? `<div class="caka">${r.aka}</div>` : ""}</td>
         <td class="cfm">${r.f}</td>
         <td class="cnotes">${ns}</td>
         <td><div class="pills">${ps}</div></td>
         <td class="ctip">${tip}</td>
       </tr>`;
-    });
-    html+=`</tbody></table></div>`;
-  });
-  document.getElementById('container').innerHTML=html||`<p style="color:var(--text3);padding:2rem;text-align:center">No chords.</p>`;
-}
+          });
+          html += `</tbody></table></div>`;
+        });
+        document.getElementById("container").innerHTML = html;
+      }
 
-// ── Fretboard SVG ──────────────────────────────────────────────────────────
-const FB_STRINGS=[{name:'G',semi:7,y:18,sw:.8},{name:'D',semi:2,y:43,sw:1.2},{name:'A',semi:9,y:68,sw:1.8},{name:'E',semi:4,y:93,sw:2.4}];
-const FB_DOT_FILL={'n-root':'#378ADD','n-3rd':'#4a8c1a','n-7th':'#c07820','n-tension':'#6660cc','n-5th':'#888780'};
+      // ── Fretboard SVG ──────────────────────────────────────────────────────────
+      const FB_STR = [
+        { name: "G", deg: 5, acc: "", y: 18, sw: 0.8 },
+        { name: "D", deg: 2, acc: "", y: 43, sw: 1.2 },
+        { name: "A", deg: 6, acc: "", y: 68, sw: 1.8 },
+        { name: "E", deg: 3, acc: "b", y: 93, sw: 2.4 },
+      ];
+      // Open string notes for standard tuning (E A D G) as intervals from C major:
+      // E=3(C's 3rd=E? No — we need absolute semitones for string open notes)
+      // Actually: open strings are absolute: E=4, A=9, D=2, G=7 semitones
+      const FB_OPEN = [
+        { name: "G", semi: 7, y: 18, sw: 0.8 },
+        { name: "D", semi: 2, y: 43, sw: 1.2 },
+        { name: "A", semi: 9, y: 68, sw: 1.8 },
+        { name: "E", semi: 4, y: 93, sw: 2.4 },
+      ];
+      const FB_FILL = {
+        "n-root": "#378ADD",
+        "n-3rd": "#4a8c1a",
+        "n-7th": "#c07820",
+        "n-tension": "#6660cc",
+        "n-5th": "#888780",
+      };
 
-function dotX(fret){return fret===0?22:40+(fret-.5)*55}
-function fretLX(n){return 40+n*55}
+      function dotX(fret) {
+        return fret === 0 ? 22 : 40 + (fret - 0.5) * 55;
+      }
+      function fretLX(n) {
+        return 40 + n * 55;
+      }
 
-function makeFretSVG(bassNotes){
-  const dm=window.matchMedia('(prefers-color-scheme:dark)').matches;
-  const LC=dm?'rgba(255,255,255,.14)':'rgba(0,0,0,.11)';
-  const TC=dm?'#707068':'#888780';
-  const NC=dm?'rgba(255,255,255,.4)':'rgba(0,0,0,.38)';
-  const MC=dm?'rgba(255,255,255,.10)':'rgba(0,0,0,.07)';
-  let s=`<svg viewBox="0 0 700 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">`;
-  // Fret lines
-  for(let f=1;f<=12;f++){const x=fretLX(f);s+=`<line x1="${x}" y1="8" x2="${x}" y2="98" stroke="${LC}" stroke-width="${f===12?1.5:.7}"/>`}
-  // Nut
-  s+=`<line x1="40" y1="6" x2="40" y2="100" stroke="${NC}" stroke-width="3.5"/>`;
-  // Fret markers
-  [3,5,7,9].forEach(f=>s+=`<circle cx="${dotX(f)}" cy="80" r="3.5" fill="${MC}"/>`);
-  s+=`<circle cx="${dotX(12)-8}" cy="80" r="3.5" fill="${MC}"/><circle cx="${dotX(12)+8}" cy="80" r="3.5" fill="${MC}"/>`;
-  // Fret numbers
-  [3,5,7,9,12].forEach(f=>s+=`<text x="${dotX(f)}" y="112" text-anchor="middle" font-size="9" fill="${TC}">${f}</text>`);
-  // String lines and labels
-  FB_STRINGS.forEach(str=>{
-    s+=`<line x1="38" y1="${str.y}" x2="698" y2="${str.y}" stroke="${LC}" stroke-width="${str.sw}"/>`;
-    s+=`<text x="34" y="${str.y+4}" text-anchor="end" font-size="10" font-weight="500" fill="${TC}">${str.name}</text>`;
-  });
-  // Dots: show ALL positions (all 4 strings) for each bass note
-  bassNotes.forEach(b=>{
-    const tn=tNote(b.n,curOff,curKey);
-    const ns=N2S[tn];
-    const fill=FB_DOT_FILL[b.t]||'#888780';
-    FB_STRINGS.forEach(str=>{
-      const fret=((ns-str.semi)%12+12)%12;
-      const cx=dotX(fret), cy=str.y;
-      s+=`<circle cx="${cx}" cy="${cy}" r="10.5" fill="${fill}" stroke="white" stroke-width="1.5"/>`;
-      s+=`<text x="${cx}" y="${cy+3.5}" text-anchor="middle" font-size="8.5" font-weight="600" fill="white">${tn}</text>`;
-    });
-  });
-  s+=`</svg>`;return s;
-}
+      function makeFretSVG(bassNotes) {
+        const dm = window.matchMedia("(prefers-color-scheme:dark)").matches;
+        const LC = dm ? "rgba(255,255,255,.14)" : "rgba(0,0,0,.11)";
+        const TC = dm ? "#707068" : "#888780";
+        const NC = dm ? "rgba(255,255,255,.4)" : "rgba(0,0,0,.38)";
+        const MC = dm ? "rgba(255,255,255,.10)" : "rgba(0,0,0,.07)";
+        let s = `<svg viewBox="0 0 700 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">`;
+        for (let f = 1; f <= 12; f++) {
+          const x = fretLX(f);
+          s += `<line x1="${x}" y1="8" x2="${x}" y2="98" stroke="${LC}" stroke-width="${f === 12 ? 1.5 : 0.7}"/>`;
+        }
+        s += `<line x1="40" y1="6" x2="40" y2="100" stroke="${NC}" stroke-width="3.5"/>`;
+        [3, 5, 7, 9].forEach(
+          (f) =>
+            (s += `<circle cx="${dotX(f)}" cy="80" r="3.5" fill="${MC}"/>`),
+        );
+        s += `<circle cx="${dotX(12) - 8}" cy="80" r="3.5" fill="${MC}"/><circle cx="${dotX(12) + 8}" cy="80" r="3.5" fill="${MC}"/>`;
+        [3, 5, 7, 9, 12].forEach(
+          (f) =>
+            (s += `<text x="${dotX(f)}" y="112" text-anchor="middle" font-size="9" fill="${TC}">${f}</text>`),
+        );
+        FB_OPEN.forEach((str) => {
+          s += `<line x1="38" y1="${str.y}" x2="698" y2="${str.y}" stroke="${LC}" stroke-width="${str.sw}"/>`;
+          s += `<text x="34" y="${str.y + 4}" text-anchor="end" font-size="10" font-weight="500" fill="${TC}">${str.name}</text>`;
+        });
+        bassNotes.forEach((b) => {
+          const noteName = iNote(curKey, b.i[0], b.i[1]);
+          const ns = N2S[noteName];
+          const fill = FB_FILL[b.t] || "#888780";
+          FB_OPEN.forEach((str) => {
+            const fret = (((ns - str.semi) % 12) + 12) % 12;
+            const cx = dotX(fret),
+              cy = str.y;
+            s += `<circle cx="${cx}" cy="${cy}" r="10.5" fill="${fill}" stroke="white" stroke-width="1.5"/>`;
+            s += `<text x="${cx}" y="${cy + 3.5}" text-anchor="middle" font-size="8.5" font-weight="600" fill="white">${noteName}</text>`;
+          });
+        });
+        s += `</svg>`;
+        return s;
+      }
 
-function makePosTable(bassNotes){
-  const isE=curTab==='eng';
-  const STR=[{n:'E',s:4},{n:'A',s:9},{n:'D',s:2},{n:'G',s:7}];
-  let h=`<div class="pos-wrap"><table class="pos-table">
-    <thead><tr>
-      <th>${isE?'Note':'Note'}</th>
-      <th>E ${isE?'string':'string'}</th>
-      <th>A ${isE?'string':'string'}</th>
-      <th>D ${isE?'string':'string'}</th>
-      <th>G ${isE?'string':'string'}</th>
-    </tr></thead><tbody>`;
-  bassNotes.forEach(b=>{
-    const tn=tNote(b.n,curOff,curKey);
-    const ns=N2S[tn];
-    const frets=STR.map(st=>((ns-st.s)%12+12)%12);
-    const minF=Math.min(...frets);
-    h+=`<tr><td><span class="pill ${b.t}">${tn}</span></td>`;
-    frets.forEach(f=>{
-      const isBest=f===minF;
-      h+=`<td class="${isBest?'best':''}">
-        ${f===0?`<span class="open-lbl">${isE?'open':'open'}</span>`:`${isE?'fret':'fret'} ${f}`}
-        ${isBest?'<span class="star">★</span>':''}
-      </td>`;
-    });
-    h+=`</tr>`;
-  });
-  h+=`</tbody></table></div>`;
-  return h;
-}
+      function makePosTable(bassNotes) {
+        const isE = curTab === "eng";
+        const STR = [
+          { n: "E", s: 4 },
+          { n: "A", s: 9 },
+          { n: "D", s: 2 },
+          { n: "G", s: 7 },
+        ];
+        let h = `<div class="pos-wrap"><table class="pos-table">
+    <thead><tr><th>${isE ? "Note" : "Note"}</th><th>E string</th><th>A string</th><th>D string</th><th>G string</th></tr></thead><tbody>`;
+        bassNotes.forEach((b) => {
+          const noteName = iNote(curKey, b.i[0], b.i[1]);
+          const ns = N2S[noteName];
+          const frets = STR.map((st) => (((ns - st.s) % 12) + 12) % 12);
+          const minF = Math.min(...frets);
+          h += `<tr><td><span class="pill ${b.t}">${noteName}</span></td>`;
+          frets.forEach((f) => {
+            const best = f === minF;
+            h += `<td class="${best ? "best" : ""}">${f === 0 ? `<span class="open-lbl">open</span>` : `fret ${f}`}${best ? '<span class="star">★</span>' : ""}</td>`;
+          });
+          h += `</tr>`;
+        });
+        h += `</tbody></table></div>`;
+        return h;
+      }
 
-// ── Render fretboard tab ───────────────────────────────────────────────────
-function renderFretboard(){
-  const isE=curTab==='eng';
-  const groups=curFilter==='all'?DATA:DATA.filter(g=>g.cat===curFilter);
-  const total=groups.reduce((s,g)=>s+g.rows.length,0);
-  document.getElementById('badge').textContent=total+(isE?' chords':' hợp âm');
-  let html='';
-  groups.forEach(g=>{
-    const gname=isE?g.groupE:g.group;
-    html+=`<div class="group-block"><div class="group-label">${gname}<span class="grp-cnt">(${g.rows.length})</span></div>`;
-    g.rows.forEach(r=>{
-      const cn=tChord(r.name,curOff,curKey);
-      const ps=r.b.map(b=>`<span class="pill ${b.t}">${tNote(b.n,curOff,curKey)}</span>`).join('');
-      html+=`<div class="fb-card">
-        <div class="fb-hdr">
-          <div><span class="fb-cname">${cn}</span><span class="fb-fm">${r.f}</span></div>
-          <div class="pills">${ps}</div>
-        </div>
+      function renderFretboard() {
+        const isE = curTab === "eng";
+        const gs = groups();
+        const total = gs.reduce((s, g) => s + g.rows.length, 0);
+        document.getElementById("badge").textContent =
+          total + (isE ? " chords" : " hợp âm");
+        let html = "";
+        gs.forEach((g) => {
+          const gname = isE ? g.groupE : g.group;
+          html += `<div class="group-block"><div class="group-label">${gname}<span class="grp-cnt">(${g.rows.length})</span></div>`;
+          g.rows.forEach((r) => {
+            const cn = tChord(r.name, curKey);
+            const ps = r.b
+              .map(
+                (b) =>
+                  `<span class="pill ${b.t}">${iNote(curKey, b.i[0], b.i[1])}</span>`,
+              )
+              .join("");
+            html += `<div class="fb-card">
+        <div class="fb-hdr"><div><span class="fb-cname">${cn}</span><span class="fb-fm">${r.f}</span></div><div class="pills">${ps}</div></div>
         <div class="fb-fret">${makeFretSVG(r.b)}</div>
         ${makePosTable(r.b)}
       </div>`;
-    });
-    html+=`</div>`;
-  });
-  document.getElementById('container').innerHTML=html||`<p style="color:var(--text3);padding:2rem;text-align:center">No chords.</p>`;
-}
+          });
+          html += `</div>`;
+        });
+        document.getElementById("container").innerHTML = html;
+      }
 
-// ── Main render ────────────────────────────────────────────────────────────
-function render(){
-  buildLegend();
-  if(curTab==='vie') renderTable('vie');
-  else if(curTab==='eng') renderTable('eng');
-  else renderFretboard();
-}
+      function render() {
+        buildLegend();
+        if (curTab === "vie") renderTable("vie");
+        else if (curTab === "eng") renderTable("eng");
+        else renderFretboard();
+      }
 
-// ── Init ───────────────────────────────────────────────────────────────────
-buildFilters();
-render();
-</script>
-</body>
+      buildFilters();
+      render();
+    </script>
+  </body>
 </html>

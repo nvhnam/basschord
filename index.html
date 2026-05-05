@@ -1,9 +1,14 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bass Chord Reference — 12 Keys</title>
+    <title>Bass Chord Reference — Smart Voice Leading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+      rel="stylesheet"
+    />
     <style>
       *,
       *::before,
@@ -13,65 +18,56 @@
         padding: 0;
       }
       :root {
-        --bg: #f7f6f2;
-        --surface: #fff;
-        --border: rgba(0, 0, 0, 0.1);
-        --border-l: rgba(0, 0, 0, 0.06);
-        --text: #1a1a18;
-        --text2: #5a5955;
-        --text3: #8a8985;
-        --accent: #4a47d0;
-        --accent-bg: #eeedfe;
-        --accent-fg: #3c3489;
-        --n-rb: #e6f1fb;
-        --n-rf: #0c447c;
-        --n-3b: #eaf3de;
-        --n-3f: #3b6d11;
-        --n-7b: #faeeda;
-        --n-7f: #633806;
-        --n-tb: #eeedfe;
-        --n-tf: #3c3489;
-        --n-5b: #f1efe8;
-        --n-5f: #5f5e5a;
-      }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #1a1a18;
-          --surface: #252523;
-          --border: rgba(255, 255, 255, 0.1);
-          --border-l: rgba(255, 255, 255, 0.06);
-          --text: #f0efe9;
-          --text2: #a0a09a;
-          --text3: #606058;
-          --accent: #9b98f0;
-          --accent-bg: #26215c;
-          --accent-fg: #cecbf6;
-          --n-rb: #042c53;
-          --n-rf: #b5d4f4;
-          --n-3b: #173404;
-          --n-3f: #c0dd97;
-          --n-7b: #412402;
-          --n-7f: #fac775;
-          --n-tb: #26215c;
-          --n-tf: #cecbf6;
-          --n-5b: #2c2c2a;
-          --n-5f: #b4b2a9;
-        }
+        --bg: #0f0f0d;
+        --bg2: #161614;
+        --surface: #1c1c19;
+        --surface2: #222220;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-l: rgba(255, 255, 255, 0.05);
+        --text: #f0efe8;
+        --text2: #9a9990;
+        --text3: #5a5a52;
+        --accent: #e8c547;
+        --accent-dim: #7a6a1a;
+        --accent-bg: rgba(232, 197, 71, 0.1);
+        --gold: #f5c842;
+        --green: #5dc96e;
+        --blue: #5aadee;
+        --red: #e86060;
+        --purple: #a87de8;
+        --n-rb: #0d2a45;
+        --n-rf: #6bbdf5;
+        --n-3b: #1a3408;
+        --n-3f: #8ed465;
+        --n-7b: #3a1f00;
+        --n-7f: #f0a030;
+        --n-tb: #251a45;
+        --n-tf: #b09af0;
+        --n-5b: #1e1e1c;
+        --n-5f: #888078;
+        --lil-warn: #e85050;
+        --common-tone: #e8c547;
+        --arrow-37: #e86060;
+        --arrow-73: #5aadee;
+        --shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
       }
       body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        font-family: "DM Sans", system-ui, sans-serif;
         background: var(--bg);
         color: var(--text);
         min-height: 100vh;
+        font-size: 14px;
       }
+
+      /* ── HEADER ── */
       .header {
-        background: var(--surface);
-        border-bottom: 0.5px solid var(--border);
-        padding: 1.1rem 1.5rem 0.8rem;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem 0.8rem;
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: 200;
+        backdrop-filter: blur(12px);
       }
       .header-top {
         display: flex;
@@ -81,119 +77,439 @@
         margin-bottom: 0.9rem;
         flex-wrap: wrap;
       }
-      .header-top h1 {
-        font-size: 16px;
-        font-weight: 500;
+      .logo {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
       }
+      .logo h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: 19px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+      .logo-sub {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text3);
+        font-family: "Space Mono", monospace;
+      }
+      .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* String mode toggle */
+      .string-toggle {
+        display: flex;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .st-btn {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 5px 13px;
+        background: transparent;
+        color: var(--text2);
+        cursor: pointer;
+        border: none;
+        letter-spacing: 0.04em;
+        font-family: "Space Mono", monospace;
+        transition: all 0.15s;
+      }
+      .st-btn.active {
+        background: var(--accent);
+        color: #0f0f0d;
+      }
+
       .tab-bar {
         display: flex;
-        gap: 4px;
+        gap: 3px;
       }
       .tab-btn {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 500;
         padding: 5px 14px;
-        border: 0.5px solid var(--border);
+        border: 1px solid var(--border);
         border-radius: 20px;
         background: transparent;
         color: var(--text2);
         cursor: pointer;
         transition: all 0.13s;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.06em;
+        font-family: "Space Mono", monospace;
       }
       .tab-btn:hover {
-        background: var(--bg);
+        border-color: var(--accent-dim);
         color: var(--text);
       }
       .tab-btn.active {
         background: var(--accent-bg);
-        color: var(--accent-fg);
-        border-color: var(--accent);
+        color: var(--accent);
+        border-color: var(--accent-dim);
       }
+
       .key-row {
         display: flex;
-        gap: 5px;
+        gap: 4px;
         flex-wrap: wrap;
       }
       .key-btn {
-        width: 44px;
-        height: 38px;
-        border: 0.5px solid var(--border);
-        border-radius: 7px;
+        width: 42px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
         background: transparent;
         color: var(--text2);
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 500;
         cursor: pointer;
         transition: all 0.13s;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-family: "Space Mono", monospace;
       }
       .key-btn:hover {
-        background: var(--bg);
+        border-color: var(--accent-dim);
         color: var(--text);
       }
       .key-btn.active {
         background: var(--accent-bg);
-        color: var(--accent-fg);
-        border-color: var(--accent);
-        font-weight: 600;
+        color: var(--accent);
+        border-color: var(--accent-dim);
       }
-      .key-btn.acc {
-        font-size: 11px;
-      }
+
+      /* ── CONTROLS BAR ── */
       .controls {
-        padding: 0.55rem 1.5rem;
-        background: var(--surface);
-        border-bottom: 0.5px solid var(--border-l);
+        padding: 0.5rem 1.5rem;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border-l);
         display: flex;
         align-items: center;
         gap: 10px;
         flex-wrap: wrap;
       }
       .filter-label {
-        font-size: 11px;
+        font-size: 10px;
         color: var(--text3);
-        font-weight: 500;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
         white-space: nowrap;
+        font-family: "Space Mono", monospace;
       }
       .filter-bar {
         display: flex;
-        gap: 5px;
+        gap: 4px;
         flex-wrap: wrap;
       }
       .fbtn {
-        font-size: 12px;
-        padding: 3px 11px;
-        border: 0.5px solid var(--border);
+        font-size: 11px;
+        padding: 3px 10px;
+        border: 1px solid var(--border);
         border-radius: 20px;
         background: transparent;
         color: var(--text2);
         cursor: pointer;
         transition: all 0.13s;
+        font-family: "Space Mono", monospace;
       }
       .fbtn:hover {
-        background: var(--bg);
+        border-color: var(--accent-dim);
         color: var(--text);
       }
       .fbtn.active {
-        background: var(--bg);
-        color: var(--text);
-        font-weight: 500;
-        border-color: var(--border);
+        background: var(--accent-bg);
+        color: var(--accent);
+        border-color: var(--accent-dim);
+        font-weight: 600;
       }
       .badge {
         font-size: 11px;
         padding: 2px 9px;
         border-radius: 20px;
-        background: var(--accent-bg);
-        color: var(--accent-fg);
+        background: var(--surface);
+        color: var(--text2);
         font-weight: 500;
         margin-left: auto;
+        font-family: "Space Mono", monospace;
+        border: 1px solid var(--border);
       }
+
+      /* ── VOICE LEADING PANEL ── */
+      .vl-panel {
+        background: var(--bg2);
+        border-bottom: 2px solid var(--accent-dim);
+        padding: 1rem 1.5rem;
+      }
+      .vl-title {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-family: "Space Mono", monospace;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .vl-title::before {
+        content: "◆";
+        font-size: 8px;
+      }
+      .vl-input-row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+        flex-wrap: wrap;
+      }
+      .vl-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .vl-field label {
+        font-size: 10px;
+        color: var(--text3);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-family: "Space Mono", monospace;
+      }
+      .vl-input {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 7px 12px;
+        border-radius: 7px;
+        font-size: 13px;
+        font-family: "Space Mono", monospace;
+        outline: none;
+        transition: border-color 0.15s;
+        min-width: 280px;
+      }
+      .vl-input:focus {
+        border-color: var(--accent-dim);
+      }
+      .vl-input::placeholder {
+        color: var(--text3);
+      }
+      .vl-btn {
+        padding: 8px 20px;
+        background: var(--accent);
+        color: #0f0f0d;
+        border: none;
+        border-radius: 7px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.05em;
+        font-family: "Space Mono", monospace;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      .vl-btn:hover {
+        background: #f5d060;
+      }
+      .vl-algo-opts {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .vl-opt-label {
+        font-size: 10px;
+        color: var(--text3);
+        font-family: "Space Mono", monospace;
+        letter-spacing: 0.05em;
+      }
+      .algo-btn {
+        font-size: 10px;
+        padding: 4px 10px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: transparent;
+        color: var(--text2);
+        cursor: pointer;
+        font-family: "Space Mono", monospace;
+        transition: all 0.13s;
+      }
+      .algo-btn.active {
+        background: var(--accent-bg);
+        color: var(--accent);
+        border-color: var(--accent-dim);
+      }
+
+      /* LIL warning badge */
+      .lil-warn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        background: rgba(232, 80, 80, 0.15);
+        color: var(--lil-warn);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-family: "Space Mono", monospace;
+        border: 1px solid rgba(232, 80, 80, 0.3);
+      }
+
+      /* ── PROGRESSION RESULT ── */
+      .prog-result {
+        background: var(--bg);
+        padding: 1rem 1.5rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .prog-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .prog-label {
+        font-size: 11px;
+        color: var(--text3);
+        font-family: "Space Mono", monospace;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .prog-quality-bar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-left: auto;
+      }
+      .quality-badge {
+        font-size: 10px;
+        padding: 2px 9px;
+        border-radius: 12px;
+        font-family: "Space Mono", monospace;
+      }
+      .qb-smooth {
+        background: rgba(93, 201, 110, 0.15);
+        color: var(--green);
+        border: 1px solid rgba(93, 201, 110, 0.3);
+      }
+      .qb-lil {
+        background: rgba(232, 80, 80, 0.15);
+        color: var(--lil-warn);
+        border: 1px solid rgba(232, 80, 80, 0.3);
+      }
+      .qb-ergonomic {
+        background: rgba(90, 173, 238, 0.15);
+        color: var(--blue);
+        border: 1px solid rgba(90, 173, 238, 0.3);
+      }
+
+      .prog-sequence {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .prog-chord-wrap {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        flex-shrink: 0;
+      }
+      .prog-chord-block {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        min-width: 200px;
+        max-width: 260px;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .prog-chord-block.active-vl {
+        border-color: var(--accent-dim);
+        box-shadow: 0 0 0 1px var(--accent-dim);
+      }
+      .pcb-name {
+        font-family: "DM Serif Display", serif;
+        font-size: 22px;
+        font-weight: 400;
+        margin-bottom: 3px;
+      }
+      .pcb-function {
+        font-size: 10px;
+        color: var(--text3);
+        font-family: "Space Mono", monospace;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+      .pcb-fret {
+        margin: 0.6rem 0;
+      }
+
+      /* Arrow connector between chords */
+      .chord-arrow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 6px;
+        gap: 5px;
+        flex-shrink: 0;
+        align-self: stretch;
+        padding-top: 56px;
+      }
+      .voice-arrow {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 9px;
+        font-family: "Space Mono", monospace;
+        white-space: nowrap;
+      }
+      .va-label {
+        width: 24px;
+        text-align: center;
+        font-size: 8px;
+        opacity: 0.8;
+        font-weight: 600;
+      }
+      .va-line {
+        height: 1.5px;
+        width: 32px;
+        position: relative;
+        border-radius: 2px;
+      }
+      .va-line::after {
+        content: "▶";
+        position: absolute;
+        right: -2px;
+        top: -5.5px;
+        font-size: 9px;
+      }
+      .va-ct {
+        color: var(--common-tone);
+      }
+      .va-37 {
+        color: var(--arrow-37);
+      }
+      .va-73 {
+        color: var(--arrow-73);
+      }
+      .va-other {
+        color: var(--text3);
+      }
+
+      /* ── CONTENT ── */
       .content {
         padding: 1.2rem 1.5rem;
         max-width: 1280px;
@@ -210,53 +526,60 @@
         display: flex;
         align-items: center;
         gap: 5px;
+        font-family: "DM Sans", sans-serif;
       }
       .leg-dot {
-        width: 10px;
-        height: 10px;
+        width: 9px;
+        height: 9px;
         border-radius: 50%;
         flex-shrink: 0;
       }
       .group-block {
-        margin-bottom: 1.6rem;
+        margin-bottom: 2rem;
       }
       .group-label {
-        font-size: 11px;
-        font-weight: 500;
+        font-size: 10px;
+        font-weight: 600;
         color: var(--text3);
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-bottom: 0.45rem;
-        padding-bottom: 4px;
-        border-bottom: 0.5px solid var(--border-l);
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--border-l);
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 6px;
+        font-family: "Space Mono", monospace;
       }
       .grp-cnt {
-        opacity: 0.5;
+        opacity: 0.45;
         font-weight: 400;
       }
+
+      /* ── TABLE ── */
       .ctable {
         width: 100%;
         border-collapse: collapse;
         font-size: 13px;
         background: var(--surface);
-        border-radius: 9px;
+        border-radius: 10px;
         overflow: hidden;
-        border: 0.5px solid var(--border);
+        border: 1px solid var(--border);
       }
       .ctable th {
         text-align: left;
-        font-weight: 500;
-        font-size: 11px;
-        color: var(--text2);
-        padding: 7px 11px;
-        border-bottom: 0.5px solid var(--border);
-        background: var(--bg);
+        font-weight: 600;
+        font-size: 10px;
+        color: var(--text3);
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg2);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-family: "Space Mono", monospace;
       }
       .ctable td {
-        padding: 7px 11px;
+        padding: 8px 12px;
         border-bottom: 0.5px solid var(--border-l);
         vertical-align: middle;
         color: var(--text);
@@ -265,26 +588,28 @@
         border-bottom: none;
       }
       .ctable tbody tr:hover td {
-        background: rgba(128, 128, 128, 0.04);
+        background: rgba(255, 255, 255, 0.02);
       }
       .cname {
         font-weight: 500;
-        font-size: 14px;
-        white-space: nowrap;
+        font-size: 15px;
+        font-family: "DM Serif Display", serif;
       }
       .caka {
-        font-size: 11px;
+        font-size: 10px;
         color: var(--text3);
         margin-top: 1px;
+        font-family: "Space Mono", monospace;
       }
       .cfm {
         color: var(--text2);
-        font-size: 12px;
+        font-size: 11px;
         white-space: nowrap;
+        font-family: "Space Mono", monospace;
       }
       .cnotes {
-        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-        font-size: 12px;
+        font-family: "Space Mono", monospace;
+        font-size: 11px;
         color: var(--text2);
         white-space: nowrap;
       }
@@ -292,19 +617,21 @@
         font-size: 12px;
         color: var(--text2);
         max-width: 230px;
+        line-height: 1.5;
       }
       .pills {
         display: flex;
         gap: 4px;
         flex-wrap: wrap;
-        min-width: 140px;
+        min-width: 130px;
       }
       .pill {
-        padding: 3px 9px;
+        padding: 2px 8px;
         border-radius: 20px;
-        font-size: 12px;
-        font-weight: 500;
+        font-size: 11px;
+        font-weight: 600;
         white-space: nowrap;
+        font-family: "Space Mono", monospace;
       }
       .n-root {
         background: var(--n-rb);
@@ -326,12 +653,18 @@
         background: var(--n-5b);
         color: var(--n-5f);
       }
+
+      /* ── FRETBOARD CARDS ── */
       .fb-card {
         background: var(--surface);
-        border: 0.5px solid var(--border);
-        border-radius: 10px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
         padding: 1rem 1.1rem;
         margin-bottom: 1rem;
+        transition: border-color 0.2s;
+      }
+      .fb-card:hover {
+        border-color: rgba(255, 255, 255, 0.13);
       }
       .fb-hdr {
         display: flex;
@@ -342,13 +675,15 @@
         gap: 8px;
       }
       .fb-cname {
-        font-size: 16px;
-        font-weight: 500;
+        font-size: 18px;
+        font-weight: 400;
+        font-family: "DM Serif Display", serif;
       }
       .fb-fm {
-        font-size: 12px;
-        color: var(--text2);
+        font-size: 11px;
+        color: var(--text3);
         margin-left: 8px;
+        font-family: "Space Mono", monospace;
       }
       .fb-fret {
         overflow-x: auto;
@@ -365,12 +700,15 @@
       }
       .pos-table th {
         text-align: center;
-        font-weight: 500;
-        font-size: 11px;
-        color: var(--text2);
+        font-weight: 600;
+        font-size: 10px;
+        color: var(--text3);
         padding: 5px 8px;
-        border-bottom: 0.5px solid var(--border);
-        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        background: var(--bg2);
+        font-family: "Space Mono", monospace;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
       .pos-table th:first-child {
         text-align: left;
@@ -381,6 +719,7 @@
         text-align: center;
         color: var(--text2);
         font-size: 12px;
+        font-family: "Space Mono", monospace;
       }
       .pos-table tr:last-child td {
         border-bottom: none;
@@ -389,7 +728,7 @@
         text-align: left;
       }
       .best {
-        font-weight: 600;
+        font-weight: 700;
         color: var(--text);
       }
       .open-lbl {
@@ -398,10 +737,32 @@
         color: var(--text3);
       }
       .star {
-        color: var(--accent-fg);
+        color: var(--accent);
         margin-left: 2px;
-        font-size: 11px;
+        font-size: 10px;
       }
+      .lil-cell {
+        color: var(--lil-warn) !important;
+      }
+      .lil-cell::after {
+        content: " ⚠";
+        font-size: 9px;
+      }
+
+      /* ── MINI CHORD DIAGRAM ── */
+      .mini-diagram {
+        position: relative;
+      }
+      .mini-diagram svg {
+        display: block;
+      }
+
+      /* Common tone glow */
+      .ct-note {
+        filter: drop-shadow(0 0 6px var(--common-tone));
+      }
+
+      /* Responsive */
       @media (max-width: 800px) {
         .ctable th:nth-child(3),
         .ctable td:nth-child(3),
@@ -418,6 +779,12 @@
         .controls {
           padding: 0.45rem 1rem;
         }
+        .vl-panel {
+          padding: 0.8rem 1rem;
+        }
+        .vl-input {
+          min-width: 200px;
+        }
       }
       @media (max-width: 540px) {
         .ctable th:nth-child(2),
@@ -425,27 +792,134 @@
           display: none;
         }
         .key-btn {
-          width: 37px;
-          height: 34px;
-          font-size: 12px;
+          width: 35px;
+          height: 33px;
+          font-size: 11px;
         }
+      }
+
+      /* Transitions */
+      .prog-result {
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .prog-chord-block {
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .prog-chord-block:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
       }
     </style>
   </head>
   <body>
     <div class="header">
       <div class="header-top">
-        <h1>Bass Chord Reference</h1>
-        <div class="tab-bar" id="tabBar">
-          <button class="tab-btn active" data-tab="vie">VIE</button>
-          <button class="tab-btn" data-tab="eng">ENG</button>
-          <button class="tab-btn" data-tab="fretboard">FRETBOARD</button>
+        <div class="logo">
+          <h1>Bass Chord Reference</h1>
+          <span class="logo-sub">Smart Voice Leading</span>
+        </div>
+        <div class="header-controls">
+          <!-- String mode toggle -->
+          <div class="string-toggle" id="stringToggle">
+            <button class="st-btn active" data-strings="4">
+              4-STR E·A·D·G
+            </button>
+            <button class="st-btn" data-strings="5">5-STR +HiC</button>
+          </div>
+          <div class="tab-bar" id="tabBar">
+            <button class="tab-btn active" data-tab="vl">VOICE LEAD</button>
+            <button class="tab-btn" data-tab="vie">VIE</button>
+            <button class="tab-btn" data-tab="eng">ENG</button>
+            <button class="tab-btn" data-tab="fretboard">FRETBOARD</button>
+          </div>
         </div>
       </div>
       <div class="key-row" id="keySelector"></div>
     </div>
+
+    <!-- Voice Leading Panel (shown in VL tab) -->
+    <div class="vl-panel" id="vlPanel" style="display: none">
+      <div class="vl-title">Smart Voice Leading Progression</div>
+      <div class="vl-input-row">
+        <div class="vl-field">
+          <label>Progression (e.g. Dm7 – G7 – Cmaj7)</label>
+          <input
+            class="vl-input"
+            id="vlInput"
+            type="text"
+            placeholder="e.g. Dm7 G7 Cmaj7  or  ii7 V7 Imaj7"
+          />
+        </div>
+        <button class="vl-btn" id="vlAnalyze">ANALYZE ▶</button>
+      </div>
+      <div
+        style="
+          margin-top: 0.6rem;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+        "
+      >
+        <span class="vl-opt-label">Algorithm:</span>
+        <div class="vl-algo-opts" id="algoOpts">
+          <button class="algo-btn active" data-algo="stepwise">
+            Stepwise Motion
+          </button>
+          <button class="algo-btn" data-algo="common">Max Common Tones</button>
+          <button class="algo-btn" data-algo="shell">Shell Voicings</button>
+        </div>
+        <span class="vl-opt-label" style="margin-left: 8px">LIL Check:</span>
+        <button class="algo-btn active" id="lilToggle" data-on="true">
+          ON
+        </button>
+        <span id="vlPresets" style="display: flex; gap: 5px; margin-left: auto">
+          <button class="algo-btn" onclick="setPreset('Dm7 G7 Cmaj7')">
+            ii–V–I (C)
+          </button>
+          <button class="algo-btn" onclick="setPreset('Am7 D7 Gmaj7')">
+            ii–V–I (G)
+          </button>
+          <button class="algo-btn" onclick="setPreset('Cm7 F7 Bbmaj7')">
+            ii–V–I (Bb)
+          </button>
+          <button class="algo-btn" onclick="setPreset('Dm7 G7 Em7 Am7')">
+            iii–vi–ii–V
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <!-- Progression Result (shown after analysis) -->
+    <div class="prog-result" id="progResult" style="display: none"></div>
+
     <div class="controls">
-      <span class="filter-label" id="fltLbl">Nhóm:</span>
+      <span class="filter-label" id="fltLbl">Group:</span>
       <div class="filter-bar" id="filterBar"></div>
       <span class="badge" id="badge"></span>
     </div>
@@ -453,9 +927,9 @@
       <div class="legend" id="legend"></div>
       <div id="container"></div>
     </div>
+
     <script>
       // ── Enharmonic-correct note engine ─────────────────────────────────────────
-      // Major scale for each key: 7 diatonic notes
       const MAJOR = {
         C: ["C", "D", "E", "F", "G", "A", "B"],
         Db: ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"],
@@ -470,8 +944,6 @@
         Bb: ["Bb", "C", "D", "Eb", "F", "G", "A"],
         B: ["B", "C#", "D#", "E", "F#", "G#", "A#"],
       };
-
-      // Semitone lookup (for fretboard positions)
       const N2S = {
         C: 0,
         "C#": 1,
@@ -509,70 +981,1310 @@
         "Bb",
         "B",
       ];
+      const SH = [
+        "C",
+        "C#",
+        "D",
+        "D#",
+        "E",
+        "F",
+        "F#",
+        "G",
+        "G#",
+        "A",
+        "A#",
+        "B",
+      ];
+      const FLAT_K = new Set(["F", "Bb", "Eb", "Ab", "Db", "Gb"]);
 
-      // Apply accidental to a base note name (theoretically correct)
       function applyAcc(note, acc) {
         if (!acc) return note;
         if (acc === "#") {
-          if (note.endsWith("b")) return note.slice(0, -1); // Bb+# → B
-          return note + "#"; // D+# → D#
+          if (note.endsWith("b")) return note.slice(0, -1);
+          return note + "#";
         }
         if (acc === "b") {
-          if (note.endsWith("#")) return note.slice(0, -1); // F#+b → F
-          return note + "b"; // B+b → Bb
+          if (note.endsWith("#")) return note.slice(0, -1);
+          return note + "b";
         }
         if (acc === "bb") {
-          // Double flat: drop 2 semitones, use flat names
           const s = N2S[note];
           if (s === undefined) return note;
           return FL[(((s - 2) % 12) + 12) % 12];
         }
         return note;
       }
-
-      // Get note name from interval: degree (1-7) + accidental ('','b','#','bb')
       function iNote(key, deg, acc) {
-        const base = MAJOR[key][deg - 1];
-        return applyAcc(base, acc);
+        return applyAcc(MAJOR[key][deg - 1], acc);
       }
-
-      // Semitone of an interval note (for fret calculation)
       function iSemi(key, deg, acc) {
         return N2S[iNote(key, deg, acc)];
       }
-
-      // Transpose chord ROOT name (e.g. "Cm7" → "Gm7")
-      // Uses correct enharmonic for the root based on key
-      function tChordName(name, key) {
-        if (name.includes(" / "))
-          return name
-            .split(" / ")
-            .map((p) => tChordName(p, key))
-            .join(" / ");
-        const m = name.match(/^([A-G][#b]?)(.*)/);
-        if (!m) return name;
-        const oldRoot = m[1],
-          quality = m[2];
-        // Find which key this chord was originally in (C) and transpose
-        // The new root IS the key name for the tonic chord; for others derive from interval
-        // Simple approach: root = tNote by semitone using key's flat/sharp convention
-        const FLAT_K = new Set(["F", "Bb", "Eb", "Ab", "Db", "Gb"]);
-        const names = FLAT_K.has(key)
-          ? FL
-          : ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-        const semi = N2S[oldRoot];
-        if (semi === undefined) return name;
-        return names[(((semi + N2S[key || "C"]) % 12) + 12) % 12] + quality;
-      }
-
-      // Render all-notes string from ni array
       function renderNi(ni, key) {
         return ni.map(([d, a]) => iNote(key, d, a)).join("–");
       }
+      function noteToSemi(n) {
+        return N2S[n] ?? 0;
+      }
+      function semiInterval(a, b) {
+        return (((b - a) % 12) + 12) % 12;
+      }
+      function semitoneDistance(a, b) {
+        const d = semiInterval(a, b);
+        return Math.min(d, 12 - d);
+      }
 
-      // ── Chord Data ─────────────────────────────────────────────────────────────
-      // b entries: {i:[degree, accidental], t:'n-xxx'}
-      // ni: [[degree, accidental], ...] for all chord tones
+      function enharmonic(semi, key) {
+        return (FLAT_K.has(key) ? FL : SH)[semi % 12];
+      }
+
+      // ── Chord name transposition ────────────────────────────────────────────────
+      function tChord(name, key) {
+        if (name.includes(" / "))
+          return name
+            .split(" / ")
+            .map((p) => tChord(p, key))
+            .join(" / ");
+        const m = name.match(/^([A-G][#b]?)(.*)/);
+        if (!m) return name;
+        const names = FLAT_K.has(key) ? FL : SH;
+        const rootSemi = N2S[m[1]];
+        const keySemi = N2S[key];
+        return names[(((rootSemi + keySemi) % 12) + 12) % 12] + m[2];
+      }
+
+      // ── String configurations ───────────────────────────────────────────────────
+      // 4-string: E A D G (low to high), 5-string adds C above G
+      const STRINGS_4 = [
+        { name: "G", semi: 7, sw: 0.8, yPct: 14 },
+        { name: "D", semi: 2, sw: 1.2, yPct: 38 },
+        { name: "A", semi: 9, sw: 1.8, yPct: 62 },
+        { name: "E", semi: 4, sw: 2.5, yPct: 86 },
+      ];
+      const STRINGS_5 = [
+        { name: "C", semi: 0, sw: 0.6, yPct: 6, hiC: true },
+        { name: "G", semi: 7, sw: 0.9, yPct: 25 },
+        { name: "D", semi: 2, sw: 1.3, yPct: 44 },
+        { name: "A", semi: 9, sw: 1.9, yPct: 63 },
+        { name: "E", semi: 4, sw: 2.5, yPct: 82 },
+      ];
+      function getStrings() {
+        return curStrings === 5 ? STRINGS_5 : STRINGS_4;
+      }
+
+      // ── Low Interval Limit (LIL) ─────────────────────────────────────────────────
+      // Reference: A2 = MIDI 45 (A string open on a 4-string bass).
+      // The "danger zone" for 3rds (3–4 semitones) is below MIDI 50 (= A string fret 5, ≈ D3).
+      // For our system, each string's open pitch in MIDI:
+      //   E1=28, A1=33, D2=38, G2=43, C3=48 (Hi-C 5-string)
+      // We map {strName → midiOpen} for LIL evaluation.
+      const STRING_MIDI = { E: 28, A: 33, D: 38, G: 43, C: 48 };
+      // LIL threshold: lower note of a 3rd must be at MIDI >= 50 (A-string fret 5 ≈ D3)
+      const LIL_MIDI_THRESHOLD = 50;
+
+      function lilCheck(fretsOnStrings) {
+        // Build list of {midiAbs, role} for each placed note
+        const notes = fretsOnStrings
+          .filter((x) => x.fret !== null && x.fret !== undefined)
+          .map((x) => {
+            const midiOpen = STRING_MIDI[x.strObj?.name] ?? 33;
+            return {
+              midi: midiOpen + x.fret,
+              role: x.role,
+              strName: x.strObj?.name,
+            };
+          })
+          .sort((a, b) => a.midi - b.midi);
+
+        for (let i = 0; i < notes.length - 1; i++) {
+          const lo = notes[i],
+            hi = notes[i + 1];
+          const interval = hi.midi - lo.midi;
+          if (interval >= 3 && interval <= 4) {
+            // Minor/Major 3rd below LIL threshold
+            if (lo.midi < LIL_MIDI_THRESHOLD) {
+              return {
+                violation: true,
+                interval,
+                loMidi: lo.midi,
+                loStr: lo.strName,
+              };
+            }
+          }
+        }
+        return { violation: false };
+      }
+
+      // ── Chord tone extraction from DATA ────────────────────────────────────────
+      // Map chord quality strings to interval sets {semi offset from root, role}
+      const CHORD_INTERVALS = {
+        maj7: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 11, r: "7th" },
+        ],
+        maj9: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 11, r: "7th" },
+          { s: 2, r: "tension" },
+        ],
+        maj13: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 11, r: "7th" },
+          { s: 9, r: "tension" },
+        ],
+        "maj7#11": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 11, r: "7th" },
+          { s: 6, r: "tension" },
+        ],
+        6: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 9, r: "tension" },
+        ],
+        "6/9": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 9, r: "tension" },
+          { s: 2, r: "tension" },
+        ],
+        add9: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 2, r: "tension" },
+        ],
+        m7: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 10, r: "7th" },
+        ],
+        min7: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 10, r: "7th" },
+        ],
+        m9: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 2, r: "tension" },
+        ],
+        m11: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 5, r: "tension" },
+        ],
+        m13: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 9, r: "tension" },
+        ],
+        m6: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 9, r: "tension" },
+        ],
+        "m6/9": [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 9, r: "tension" },
+          { s: 2, r: "tension" },
+        ],
+        mmaj7: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 11, r: "7th" },
+        ],
+        madd9: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 2, r: "tension" },
+        ],
+        m7b5: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 6, r: "5th" },
+          { s: 10, r: "7th" },
+        ],
+        ø: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 6, r: "5th" },
+          { s: 10, r: "7th" },
+        ],
+        7: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 7, r: "5th" },
+          { s: 10, r: "7th" },
+        ],
+        9: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 2, r: "tension" },
+        ],
+        13: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 9, r: "tension" },
+        ],
+        "7sus4": [
+          { s: 0, r: "root" },
+          { s: 5, r: "tension" },
+          { s: 7, r: "5th" },
+          { s: 10, r: "7th" },
+        ],
+        "7b9": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 1, r: "tension" },
+        ],
+        "7#9": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 3, r: "tension" },
+        ],
+        "7b13": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 8, r: "tension" },
+        ],
+        "7#11": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 6, r: "tension" },
+        ],
+        "7alt": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 10, r: "7th" },
+          { s: 3, r: "tension" },
+        ],
+        dim7: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 6, r: "5th" },
+          { s: 9, r: "7th" },
+        ],
+        dim: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 6, r: "5th" },
+        ],
+        aug: [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 8, r: "5th" },
+        ],
+        sus2: [
+          { s: 0, r: "root" },
+          { s: 2, r: "tension" },
+          { s: 7, r: "5th" },
+        ],
+        sus4: [
+          { s: 0, r: "root" },
+          { s: 5, r: "tension" },
+          { s: 7, r: "5th" },
+        ],
+        5: [
+          { s: 0, r: "root" },
+          { s: 7, r: "5th" },
+        ],
+        "": [
+          { s: 0, r: "root" },
+          { s: 4, r: "3rd" },
+          { s: 7, r: "5th" },
+        ],
+        m: [
+          { s: 0, r: "root" },
+          { s: 3, r: "3rd" },
+          { s: 7, r: "5th" },
+        ],
+      };
+
+      function parseChordInput(str, contextKey) {
+        // Returns {rootSemi, rootName, quality, intervals:[{semi(abs),role}], name}
+        // PRIORITY: letter names FIRST (E, A, D, G, B, F etc.) to avoid C→Roman confusion
+        str = str.trim();
+
+        const roman = {
+          I: 0,
+          II: 2,
+          III: 4,
+          IV: 5,
+          V: 7,
+          VI: 9,
+          VII: 11,
+          i: 0,
+          ii: 2,
+          iii: 4,
+          iv: 5,
+          v: 7,
+          vi: 9,
+          vii: 11,
+          bII: 1,
+          bIII: 3,
+          bVI: 8,
+          bVII: 10,
+        };
+
+        let rootSemi, quality, rootName;
+
+        // ── Step 1: Try letter-based name first (highest priority) ──
+        const letterMatch = str.match(/^([A-G][#b]?)(.*)/);
+        const romanMatch = str.match(
+          /^(b?(?:VII|VI|IV|III|II|I|vii|vi|iv|iii|ii|V|v|I|i))(.*)/,
+        );
+
+        if (letterMatch) {
+          // Letter match wins unless it's ambiguous and Roman is longer
+          rootName = letterMatch[1];
+          rootSemi = N2S[rootName] ?? 0;
+          quality = letterMatch[2];
+        } else if (romanMatch && roman[romanMatch[1]] !== undefined) {
+          const keySemi = N2S[contextKey] || 0;
+          rootSemi = (((roman[romanMatch[1]] + keySemi) % 12) + 12) % 12;
+          quality = romanMatch[2];
+          rootName = enharmonic(rootSemi, contextKey);
+        } else {
+          return null;
+        }
+
+        // ── Step 2: Quality normalization — ordered longest-match first ──
+        const QUALITY_ORDER = [
+          "maj7#11",
+          "maj13",
+          "maj9",
+          "maj7",
+          "mmaj7",
+          "madd9",
+          "m7b5",
+          "m6/9",
+          "m13",
+          "m11",
+          "m9",
+          "m7",
+          "m6",
+          "min7",
+          "add9",
+          "6/9",
+          "7sus4",
+          "7#11",
+          "7#9",
+          "7b9",
+          "7b13",
+          "7alt",
+          "dim7",
+          "dim",
+          "aug",
+          "sus2",
+          "sus4",
+          "ø",
+          "5",
+          "m",
+          "13",
+          "9",
+          "7",
+          "6",
+          "",
+        ];
+
+        let intervals = null;
+        // Exact match
+        for (const k of QUALITY_ORDER) {
+          if (quality === k) {
+            intervals = CHORD_INTERVALS[k];
+            break;
+          }
+        }
+        // Case-insensitive fallback
+        if (!intervals) {
+          for (const k of Object.keys(CHORD_INTERVALS)) {
+            if (quality.toLowerCase() === k.toLowerCase()) {
+              intervals = CHORD_INTERVALS[k];
+              break;
+            }
+          }
+        }
+        if (!intervals) intervals = CHORD_INTERVALS[""];
+
+        const tones = intervals.map((iv) => ({
+          semi: (rootSemi + iv.s) % 12,
+          role: iv.r,
+          offset: iv.s,
+        }));
+        return { rootSemi, rootName, quality, tones, name: rootName + quality };
+      }
+
+      // ── Voice Leading Engine ────────────────────────────────────────────────────
+      // For each chord, generate candidate voicings on the bass (3-4 notes, within 4-fret span)
+      // Then pick the sequence with minimum total movement
+
+      function fretOf(noteSemi, stringSemi) {
+        return (((noteSemi - stringSemi) % 12) + 12) % 12;
+      }
+
+      // ── Professional Voicing Generator (Janek/Hadrien style) ────────────────────
+      // KEY DESIGN PRINCIPLES:
+      //  1. No rootFret match restriction — any chord tone can start the voicing
+      //  2. Open strings (fret 0) allowed and excluded from 4-fret span calculation
+      //  3. Target register: frets 5–15 (prioritized), fall back to 2–15
+      //  4. LIL enforcement: 3rds below LIL_MIDI_THRESHOLD → auto-pivot to 10ths or shells
+      //  5. Upper-string (G, C) voicings packed tightly (closed voicing for R&B gloss)
+      //  6. Shell voicings: Root + 7th as fallback or explicit algo
+
+      function generateVoicings(chord, algo, strings) {
+        const { rootSemi, tones } = chord;
+
+        const guideTones = tones.filter(
+          (t) => t.role === "3rd" || t.role === "7th",
+        );
+        const tensions = tones.filter((t) => t.role === "tension");
+        const fifth = tones.find((t) => t.role === "5th");
+
+        // String layers — hi strings carry guide tones & tensions
+        const is5 = strings.length === 5;
+        // hiStrings = C and G (or just G on 4-string)
+        const hiStrings = is5
+          ? strings.filter((s) => s.name === "C" || s.name === "G")
+          : strings.filter((s) => s.name === "G");
+        const loStrings = strings.filter((s) => !hiStrings.includes(s));
+
+        // Helper: MIDI absolute pitch for a placed note
+        function midiAbs(strName, fret) {
+          return (STRING_MIDI[strName] ?? 33) + fret;
+        }
+
+        // Helper: build a voiced set from a starting-note anchor on any string
+        function buildVoicing(
+          anchorStr,
+          anchorFret,
+          anchorTone,
+          remainingTones,
+          allStrings,
+        ) {
+          const placed = [
+            {
+              strObj: anchorStr,
+              fret: anchorFret,
+              semi: anchorTone.semi,
+              role: anchorTone.role,
+            },
+          ];
+          let usedStrings = new Set([anchorStr.name]);
+
+          // Try to place remaining tones on unused strings
+          // Prefer higher strings for upper tones
+          const toPlace = [...remainingTones].sort(
+            (a, b) => a.offset - b.offset,
+          );
+          // preferred string order: try hi strings for higher-offset tones
+          const strOrder = [
+            ...hiStrings.filter((s) => !usedStrings.has(s.name)),
+            ...loStrings.filter((s) => !usedStrings.has(s.name)),
+          ];
+
+          for (const tone of toPlace) {
+            for (const str of strOrder) {
+              if (usedStrings.has(str.name)) continue;
+              // Try this note on this string in multiple octaves
+              let bestFret = null,
+                bestScore = Infinity;
+              for (let oct = 0; oct < 3; oct++) {
+                const rawFret = fretOf(tone.semi, str.semi);
+                const fret = rawFret + oct * 12;
+                if (fret < 0 || fret > 15) continue;
+                // Compute span with open strings excluded
+                const allFrets = [...placed.map((p) => p.fret), fret].filter(
+                  (f) => f > 0,
+                );
+                const span =
+                  allFrets.length > 0
+                    ? Math.max(...allFrets) - Math.min(...allFrets)
+                    : 0;
+                if (span > 4) continue;
+                // Score: prefer register 5–15
+                const midi = midiAbs(str.name, fret);
+                const regScore = Math.abs(midi - 55); // centre around D3 area
+                if (regScore < bestScore) {
+                  bestScore = regScore;
+                  bestFret = fret;
+                }
+              }
+              if (bestFret !== null) {
+                placed.push({
+                  strObj: str,
+                  fret: bestFret,
+                  semi: tone.semi,
+                  role: tone.role,
+                });
+                usedStrings.add(str.name);
+                strOrder.splice(strOrder.indexOf(str), 1);
+                break;
+              }
+            }
+          }
+          return placed;
+        }
+
+        // Helper: compute fret span (open strings=0 excluded)
+        function spanOf(placed) {
+          const frets = placed.map((p) => p.fret).filter((f) => f > 0);
+          if (frets.length < 2) return 0;
+          return Math.max(...frets) - Math.min(...frets);
+        }
+
+        // Helper: lowest MIDI pitch in voicing
+        function lowestMidi(placed) {
+          return Math.min(...placed.map((p) => midiAbs(p.strObj.name, p.fret)));
+        }
+        // Helper: highest MIDI pitch in voicing (top voice)
+        function highestMidi(placed) {
+          return Math.max(...placed.map((p) => midiAbs(p.strObj.name, p.fret)));
+        }
+
+        let voicings = [];
+
+        // ── Shell Voicing builder (Root + 7th, optionally 3rd) ──
+        function buildShell() {
+          const shellTones = tones.filter(
+            (t) => t.role === "root" || t.role === "7th" || t.role === "3rd",
+          );
+          for (const anchorStr of [...loStrings, ...hiStrings]) {
+            for (let fret = 2; fret <= 14; fret++) {
+              const rootFret = fretOf(rootSemi, anchorStr.semi);
+              const candidates = [rootFret, rootFret + 12].filter(
+                (f) => f >= 2 && f <= 14,
+              );
+              for (const rf of candidates) {
+                if (Math.abs(rf - fret) > 2) continue;
+                const anchored = { semi: rootSemi, role: "root", offset: 0 };
+                const rest = shellTones.filter((t) => t.role !== "root");
+                const pl = buildVoicing(anchorStr, rf, anchored, rest, strings);
+                if (pl.length >= 2 && spanOf(pl) <= 4) voicings.push(pl);
+              }
+            }
+          }
+        }
+
+        // ── Full voicing builder: anchor ANY chord tone on ANY string ──
+        function buildFull() {
+          const allTones = [...tones];
+          for (const anchorTone of allTones) {
+            for (const anchorStr of strings) {
+              // Try this tone on this string at all viable frets (incl. open = 0)
+              for (let oct = 0; oct < 3; oct++) {
+                const rawFret = fretOf(anchorTone.semi, anchorStr.semi);
+                const anchorFret = rawFret + oct * 12;
+                if (anchorFret < 0 || anchorFret > 15) continue;
+
+                const rest = allTones.filter((t) => t !== anchorTone);
+                const pl = buildVoicing(
+                  anchorStr,
+                  anchorFret,
+                  anchorTone,
+                  rest,
+                  strings,
+                );
+                if (pl.length < 2) continue;
+                if (spanOf(pl) > 4) continue;
+
+                // ── LIL check ──
+                let lilViolation = false;
+                if (curLIL) {
+                  const lilIn = pl.map((p) => ({
+                    strObj: p.strObj,
+                    fret: p.fret,
+                    noteSemi: p.semi,
+                    role: p.role,
+                  }));
+                  if (lilCheck(lilIn).violation) lilViolation = true;
+                }
+
+                // ── Hadrien 10th auto-pivot ──
+                // If LIL violation AND we're in shell/stepwise mode, replace the 3rd with
+                // a 10th (3rd one octave up) on a higher string
+                if (lilViolation && algo !== "shell") {
+                  const thirdTone = pl.find((p) => p.role === "3rd");
+                  if (thirdTone) {
+                    // Try to move the 3rd up an octave on a higher string
+                    const altPl = pl.filter((p) => p !== thirdTone);
+                    const higherStr = hiStrings.find(
+                      (s) => !altPl.some((p) => p.strObj.name === s.name),
+                    );
+                    if (higherStr) {
+                      const newFret = fretOf(thirdTone.semi, higherStr.semi);
+                      if (newFret >= 0 && newFret <= 15) {
+                        altPl.push({
+                          strObj: higherStr,
+                          fret: newFret,
+                          semi: thirdTone.semi,
+                          role: thirdTone.role,
+                        });
+                        if (spanOf(altPl) <= 4) {
+                          voicings.push({
+                            placed: altPl,
+                            lilViolation: false,
+                            is10th: true,
+                          });
+                          continue;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                voicings.push({ placed: pl, lilViolation, is10th: false });
+              }
+            }
+          }
+        }
+
+        if (algo === "shell") {
+          buildShell();
+          // Wrap raw placed arrays
+          voicings = voicings.map((pl) =>
+            Array.isArray(pl)
+              ? { placed: pl, lilViolation: false, is10th: false }
+              : pl,
+          );
+        } else {
+          buildFull();
+          // Also add shells as fallback candidates
+          buildShell();
+          voicings = voicings.map((pl) =>
+            Array.isArray(pl)
+              ? { placed: pl, lilViolation: false, is10th: false }
+              : pl,
+          );
+        }
+
+        // Remove ghost voicings: must have at least root or a guide tone
+        voicings = voicings.filter((v) => {
+          const roles = new Set(v.placed.map((p) => p.role));
+          return roles.has("root") || (roles.has("3rd") && roles.has("7th"));
+        });
+
+        // Deduplicate by fret fingerprint
+        const seen = new Set();
+        voicings = voicings.filter((v) => {
+          const sig = v.placed
+            .map((p) => `${p.strObj.name}:${p.fret}`)
+            .sort()
+            .join("|");
+          if (seen.has(sig)) return false;
+          seen.add(sig);
+          return true;
+        });
+
+        // ── Prefer clean LIL voicings; fall back to flagged if none clean ──
+        const clean = voicings.filter((v) => !v.lilViolation);
+        let pool = clean.length > 0 ? clean : voicings;
+
+        // ── Score voicings: prioritize frets 5–15, tight span, prefer hi-register for G/C ──
+        pool.forEach((v) => {
+          const frets = v.placed.map((p) => p.fret);
+          const lo = Math.min(...frets.filter((f) => f > 0), 99);
+          const hi = Math.max(...frets, 0);
+          const span = spanOf(v.placed);
+          // Register score: penalize below fret 5 or above fret 15
+          const regPenalty =
+            (lo < 5 ? Math.max(0, 5 - lo) * 2 : 0) +
+            (hi > 15 ? Math.max(0, hi - 15) * 3 : 0);
+          // Bonus for having notes on G/C strings (upper register color)
+          const hiBonus =
+            -v.placed.filter(
+              (p) => p.strObj.name === "G" || p.strObj.name === "C",
+            ).length * 1.5;
+          // Prefer more chord tones covered
+          const coverBonus = -v.placed.length * 0.5;
+          v._score =
+            span * 1.5 +
+            regPenalty +
+            hiBonus +
+            coverBonus +
+            (v.is10th ? -2 : 0);
+        });
+        pool.sort((a, b) => a._score - b._score);
+
+        // Attach metadata for voice leading
+        pool.forEach((v) => {
+          const frets = v.placed.map((p) => p.fret);
+          v.span = spanOf(v.placed);
+          v.lowestFret = Math.min(...frets);
+          v.highestMidi = highestMidi(v.placed);
+          v.lowestMidi = lowestMidi(v.placed);
+        });
+
+        return pool.slice(0, 10);
+      }
+
+      // ── Professional Voice Leading Score Engine ──────────────────────────────────
+      // Three pillars of Janek/Hadrien style:
+      //   1. TOP VOICE MELODIC MOTION: top note moves by ≤2 semitones when possible
+      //   2. TOTAL FINGER MOTION: minimize cumulative movement of all voices (DP)
+      //   3. COMMON TONE BONUS: reward held tones (zero movement)
+
+      function voiceLeadScore(prevVoicing, nextVoicing, algo) {
+        const prevSemis = prevVoicing.placed.map((p) => p.semi);
+        const nextSemis = nextVoicing.placed.map((p) => p.semi);
+
+        // ── Total motion (path of least resistance) ──
+        let totalMove = 0;
+        for (const ns of nextSemis) {
+          const bestMove = Math.min(
+            ...prevSemis.map((ps) => semitoneDistance(ps, ns)),
+          );
+          totalMove += bestMove;
+        }
+
+        // ── Melodic top-voice bonus ──
+        // The highest-pitched note (by MIDI) defines the melody
+        const prevTopMidi = prevVoicing.highestMidi ?? 99;
+        const nextTopMidi = nextVoicing.highestMidi ?? 99;
+        const topMotion = Math.abs(nextTopMidi - prevTopMidi);
+        // Strongly reward stepwise melody (0=common, 1=half, 2=whole = perfect)
+        const topBonus =
+          topMotion <= 2 ? -(3 - topMotion) * 3 : topMotion * 1.5;
+
+        // ── Common tones bonus (zero-cost held notes) ──
+        const prevSet = new Set(prevSemis);
+        const ctCount = nextSemis.filter((s) => prevSet.has(s)).length;
+        const ctBonus = ctCount * -2.5;
+
+        // ── Prefer target register (frets 5-15) ──
+        const lo = nextVoicing.lowestFret ?? 0;
+        const regPenalty = lo < 5 ? Math.max(0, 5 - lo) * 1.5 : 0;
+
+        // ── Shell algo: weight guide-tone resolution higher ──
+        let shellBonus = 0;
+        if (algo === "shell" || algo === "common") {
+          const gt3 = prevVoicing.placed.find((p) => p.role === "3rd");
+          const gt7 = prevVoicing.placed.find((p) => p.role === "7th");
+          if (gt3) {
+            const d = Math.min(
+              ...nextSemis.map((n) => semitoneDistance(gt3.semi, n)),
+            );
+            if (d <= 1) shellBonus -= 3;
+          }
+          if (gt7) {
+            const d = Math.min(
+              ...nextSemis.map((n) => semitoneDistance(gt7.semi, n)),
+            );
+            if (d <= 1) shellBonus -= 3;
+          }
+        }
+
+        return totalMove + topBonus + ctBonus + regPenalty + shellBonus;
+      }
+
+      function commonTones(v1, v2) {
+        const s1 = new Set(v1.placed.map((p) => p.semi));
+        const s2 = new Set(v2.placed.map((p) => p.semi));
+        return [...s1].filter((s) => s2.has(s));
+      }
+
+      function optimizeProgression(chords, algo, strings) {
+        // For each chord, get voicing candidates
+        const candidates = chords.map((c) =>
+          generateVoicings(c, algo, strings),
+        );
+        if (candidates.some((c) => c.length === 0)) return null;
+
+        // Dynamic programming: find path minimizing total voice movement
+        // Seed with a cost that prefers the register 5–15 (prefer voicings already scored lower)
+        const n = chords.length;
+        const dp = candidates[0].map((v, i) => ({
+          cost: v._score ?? v.lowestFret,
+          path: [i],
+        }));
+
+        for (let ci = 1; ci < n; ci++) {
+          const newDp = candidates[ci].map((v, vi) => {
+            let best = Infinity,
+              bestPrev = 0;
+            dp.forEach((prev, pi) => {
+              const prevV = candidates[ci - 1][prev.path[prev.path.length - 1]];
+              const score = voiceLeadScore(prevV, v, algo);
+              const total = prev.cost + score;
+              if (total < best) {
+                best = total;
+                bestPrev = pi;
+              }
+            });
+            return { cost: best, path: [...dp[bestPrev].path, vi] };
+          });
+          dp.splice(0, dp.length, ...newDp);
+        }
+
+        // Find best final state
+        let bestFinal = dp[0];
+        for (const d of dp) if (d.cost < bestFinal.cost) bestFinal = d;
+
+        // Build result
+        return bestFinal.path.map((vi, ci) => ({
+          chord: chords[ci],
+          voicing: candidates[ci][vi],
+          candidates: candidates[ci],
+        }));
+      }
+
+      // ── Voice path arrows between chords ───────────────────────────────────────
+      function buildVoicePaths(v1, v2) {
+        const ct = new Set(commonTones(v1, v2));
+        const paths = [];
+        // Guide tone resolutions: 3rd → 7th, 7th → 3rd (tritone sub style)
+        const gt1 = v1.placed.filter(
+          (p) => p.role === "3rd" || p.role === "7th",
+        );
+        const notes2 = v2.placed;
+        for (const g of gt1) {
+          const closest = notes2.reduce(
+            (best, n) => {
+              const d = semitoneDistance(g.semi, n.semi);
+              return d < best.d ? { n, d } : best;
+            },
+            { n: null, d: 999 },
+          );
+          if (closest.d <= 2) {
+            const isCommon = ct.has(g.semi) && ct.has(closest.n.semi);
+            const type = isCommon ? "ct" : g.role === "3rd" ? "37" : "73";
+            paths.push({ from: g, to: closest.n, type, semis: closest.d });
+          }
+        }
+        return paths;
+      }
+
+      // ── Fretboard SVG renderer ─────────────────────────────────────────────────
+      const FB_FILL = {
+        root: "#378ADD",
+        "3rd": "#4a8c1a",
+        "7th": "#c07820",
+        tension: "#7a60d8",
+        "5th": "#555550",
+      };
+      const ROLE_CLASS = {
+        root: "n-root",
+        "3rd": "n-3rd",
+        "7th": "n-7th",
+        tension: "n-tension",
+        "5th": "n-5th",
+      };
+
+      // Interval label inside note circle (Hadrien 10th style)
+      const ROLE_LABEL = {
+        root: "R",
+        "3rd": "3",
+        "7th": "7",
+        tension: "T",
+        "5th": "5",
+      };
+
+      // Derive a richer interval label from semi offset vs root
+      function intervalLabel(noteSemi, chord) {
+        // chord may be null in ref view — fall back to role label
+        if (!chord) return null;
+        const diff = (((noteSemi - chord.rootSemi) % 12) + 12) % 12;
+        const MAP = {
+          0: "R",
+          1: "b9",
+          2: "9",
+          3: "b3",
+          4: "3",
+          5: "11",
+          6: "#11",
+          7: "5",
+          8: "b13",
+          9: "13",
+          10: "b7",
+          11: "Δ7",
+        };
+        return MAP[diff] || "?";
+      }
+
+      function makeFretSVG(
+        placed,
+        strings,
+        commonSemis = new Set(),
+        highlightPaths = [],
+        compact = false,
+        chordCtx = null,
+      ) {
+        // ── Dynamic fret window ──────────────────────────────────────────────────
+        const PAD = 20; // safety padding around SVG
+
+        // Collect all non-open frets to determine window
+        const usedFrets = placed.map((p) => p.fret).filter((f) => f > 0);
+        let fretMin = usedFrets.length ? Math.min(...usedFrets) : 1;
+        let fretMax = usedFrets.length ? Math.max(...usedFrets) : 5;
+
+        // Always show at least a 4-fret window; expand for wide voicings
+        const naturalSpan = fretMax - fretMin;
+        const windowSize = Math.max(4, naturalSpan + 1);
+        // Start window one fret before lowest note (but never < 1)
+        const winStart = Math.max(1, fretMin - 1);
+        const winEnd = winStart + windowSize;
+
+        // If any open strings present, include nut (fret 0) in view
+        const hasOpen = placed.some((p) => p.fret === 0);
+
+        // ── Geometry ─────────────────────────────────────────────────────────────
+        const NStr = strings.length;
+        const STR_STEP = compact ? 20 : 26; // vertical spacing per string
+        const NR = compact ? 8 : 12; // note circle radius
+        const FS = compact ? 7.5 : 10; // fret number font size
+        const FH = compact ? 7 : 9.5; // note label font height
+
+        const LABEL_ZONE = compact ? 22 : 28; // left zone for string names
+        const NUT_ZONE = hasOpen ? (compact ? 18 : 22) : 0; // extra space before nut for open-string dots
+        const FRET_STEP = compact ? 32 : 50; // pixels per fret
+        const MARKER_ZONE = compact ? 0 : 22; // bottom zone for fret markers
+
+        const nFrets = winEnd - winStart + 1;
+        const W = PAD * 2 + LABEL_ZONE + NUT_ZONE + nFrets * FRET_STEP;
+        const H = PAD * 2 + NStr * STR_STEP + MARKER_ZONE;
+
+        // String y coordinates — perfectly centered
+        const strTop = PAD;
+        const strBottom = PAD + (NStr - 1) * STR_STEP;
+        function strY(i) {
+          return strTop + i * STR_STEP;
+        }
+
+        // X coordinate for a given fret
+        function fretX(f) {
+          if (f === 0) {
+            // Place open-string dot to the left of nut
+            const openOffset = compact ? 9 : 11;
+            return PAD + LABEL_ZONE + NUT_ZONE - openOffset;
+          }
+          // fret f is relative to window
+          const slot = f - winStart; // 0-based slot
+          return PAD + LABEL_ZONE + NUT_ZONE + (slot + 0.5) * FRET_STEP;
+        }
+        function fretLineX(f) {
+          const slot = f - winStart;
+          return PAD + LABEL_ZONE + NUT_ZONE + slot * FRET_STEP;
+        }
+
+        const LC = "rgba(255,255,255,.13)";
+        const TC = "#5a5a52";
+        const NC = "rgba(255,255,255,.5)";
+        const MC = "rgba(255,255,255,.09)";
+
+        // ── SVG body ──────────────────────────────────────────────────────────────
+        const gridTop = strTop - STR_STEP * 0.35;
+        const gridBot = strBottom + STR_STEP * 0.35;
+
+        let body = "";
+
+        // ── Fret lines (window only) ──────────────────────────────────────────────
+        for (let f = winStart; f <= winEnd + 1; f++) {
+          const x = fretLineX(f);
+          const isFirst = f === winStart;
+          // Draw the nut-style bar for first fret in window (visual anchor)
+          body += `<line x1="${x}" y1="${gridTop}" x2="${x}" y2="${gridBot}" stroke="${isFirst ? NC : LC}" stroke-width="${isFirst ? 2 : 0.7}"/>`;
+        }
+
+        // ── Nut / open-string zone ────────────────────────────────────────────────
+        if (hasOpen) {
+          const nutX = PAD + LABEL_ZONE + NUT_ZONE - 2;
+          body += `<line x1="${nutX}" y1="${gridTop}" x2="${nutX}" y2="${gridBot}" stroke="${NC}" stroke-width="3" stroke-linecap="round"/>`;
+        }
+
+        // ── Fret markers (dots) — only for standard positions in window ──────────
+        if (!compact) {
+          const MARKER_FRETS = [3, 5, 7, 9, 12, 15, 17];
+          const DOUBLE = [12];
+          MARKER_FRETS.forEach((f) => {
+            if (f < winStart || f > winEnd) return;
+            const mx = fretX(f);
+            const my = H - MARKER_ZONE * 0.45;
+            if (DOUBLE.includes(f)) {
+              body += `<circle cx="${mx - 7}" cy="${my}" r="3" fill="${MC}"/>`;
+              body += `<circle cx="${mx + 7}" cy="${my}" r="3" fill="${MC}"/>`;
+            } else {
+              body += `<circle cx="${mx}" cy="${my}" r="3" fill="${MC}"/>`;
+            }
+            body += `<text x="${mx}" y="${H - 4}" text-anchor="middle" font-size="${FS}" fill="${TC}" font-family="Space Mono,monospace">${f}</text>`;
+          });
+        }
+
+        // ── Strings ───────────────────────────────────────────────────────────────
+        const xLineEnd = PAD + LABEL_ZONE + NUT_ZONE + nFrets * FRET_STEP;
+        strings.forEach((str, i) => {
+          const y = strY(i);
+          body += `<line x1="${PAD + LABEL_ZONE}" y1="${y}" x2="${xLineEnd}" y2="${y}" stroke="${LC}" stroke-width="${str.sw}"/>`;
+          body += `<text x="${PAD + LABEL_ZONE - 4}" y="${y + 3.5}" text-anchor="end" font-size="${compact ? 8 : 10}" font-weight="600" fill="${TC}" font-family="Space Mono,monospace">${str.name}</text>`;
+        });
+
+        // ── Place notes ────────────────────────────────────────────────────────────
+        placed.forEach((p) => {
+          const si = strings.findIndex((s) => s.name === p.strObj.name);
+          if (si < 0) return;
+          // Skip notes outside the view window (except open)
+          if (p.fret > 0 && (p.fret < winStart || p.fret > winEnd)) return;
+
+          const cx = fretX(p.fret);
+          const cy = strY(si);
+          const isCommon = commonSemis.has(p.semi);
+          const fill = FB_FILL[p.role] || "#666";
+          const glowAttr = isCommon ? 'filter="url(#ctglow)"' : "";
+
+          // Outer glow ring for common tones
+          if (isCommon) {
+            body += `<circle cx="${cx}" cy="${cy}" r="${NR + 5}" fill="none" stroke="#f5c842" stroke-width="1.5" opacity=".55"/>`;
+            body += `<circle cx="${cx}" cy="${cy}" r="${NR + 9}" fill="none" stroke="#f5c842" stroke-width=".5" opacity=".25"/>`;
+          }
+
+          body += `<circle cx="${cx}" cy="${cy}" r="${NR}" fill="${fill}" stroke="${isCommon ? "#f5c842" : "rgba(255,255,255,.35)"}" stroke-width="${isCommon ? 2 : 1}" ${glowAttr}/>`;
+
+          // Interval label inside circle
+          const lbl = chordCtx
+            ? intervalLabel(p.semi, chordCtx)
+            : enharmonic(p.semi, curKey);
+          body += `<text x="${cx}" y="${cy + FH * 0.38}" text-anchor="middle" dominant-baseline="middle" font-size="${FH}" font-weight="700" fill="white" font-family="Space Mono,monospace">${lbl}</text>`;
+        });
+
+        // ── Assemble final SVG with defs ──────────────────────────────────────────
+        const defs = `<defs>
+    <filter id="ctglow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>`;
+
+        return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${W}px;display:block">${defs}${body}</svg>`;
+      }
+
+      function makePosFull(placed, strings, lilViolation) {
+        const strNames = strings.map((s) => s.name);
+        let h = `<div class="pos-wrap"><table class="pos-table"><thead><tr><th>Note</th><th>Role</th>`;
+        strNames.forEach((n) => (h += `<th>${n}</th>`));
+        h += `</tr></thead><tbody>`;
+        // Collect unique semis
+        const seen = new Set();
+        const rows = [];
+        placed.forEach((p) => {
+          if (!seen.has(p.semi)) {
+            seen.add(p.semi);
+            rows.push(p);
+          }
+        });
+        rows.forEach((p) => {
+          const noteName = enharmonic(p.semi, curKey);
+          const frets = strings.map((st) => {
+            const f = fretOf(p.semi, st.semi);
+            const isPlaced = placed.some(
+              (pp) => pp.strObj.name === st.name && pp.semi === p.semi,
+            );
+            return { f, isPlaced };
+          });
+          const minF = Math.min(...frets.map((x) => x.f));
+          h += `<tr><td><span class="pill ${ROLE_CLASS[p.role] || "n-5th"}">${noteName}</span></td><td style="font-size:10px;color:var(--text3);font-family:'Space Mono',monospace">${p.role}</td>`;
+          frets.forEach(({ f, isPlaced }) => {
+            const best = f === minF;
+            // LIL check for this note on this string
+            const strObj =
+              strings.find((st) => fretOf(p.semi, st.semi) === f) || {};
+            h += `<td class="${best ? "best" : ""}">${f === 0 ? `<span class="open-lbl">open</span>` : `fret ${f}`}${best ? '<span class="star">★</span>' : ""}</td>`;
+          });
+          h += `</tr>`;
+        });
+        h += `</tbody></table></div>`;
+        if (lilViolation)
+          h += `<div style="margin-top:.4rem"><span class="lil-warn">⚠ LIL: 3rd interval below recommended register — consider open voicing or 10th</span></div>`;
+        return h;
+      }
+
+      // ── Chord function labels ───────────────────────────────────────────────────
+      function midiAbsOf(p) {
+        return (STRING_MIDI[p.strObj?.name] ?? 33) + p.fret;
+      }
+      function guessFunction(chord, contextKey) {
+        const diff = (chord.rootSemi - (N2S[contextKey] || 0) + 12) % 12;
+        const q = chord.quality;
+        if (diff === 0 && (q.includes("maj7") || q === "" || q === "maj9"))
+          return "Imaj7 — Tonic";
+        if (diff === 2 && (q === "m7" || q === "min7"))
+          return "iim7 — Subdominant";
+        if (
+          diff === 7 &&
+          (q === "7" || q === "9" || q === "13" || q.startsWith("7"))
+        )
+          return "V7 — Dominant";
+        if (diff === 9 && (q === "m7" || q === "min7")) return "vim7 — Tonic";
+        if (diff === 5 && (q.includes("maj7") || q === ""))
+          return "IVmaj7 — Subdominant";
+        return chord.name;
+      }
+
+      // ── Render Voice Leading Progression ───────────────────────────────────────
+      function renderProgression(input) {
+        const parts = input
+          .trim()
+          .split(/[\s\-–—,]+/)
+          .filter(Boolean);
+        if (parts.length < 2) {
+          document.getElementById("progResult").innerHTML =
+            `<div style="padding:1rem;color:var(--lil-warn);font-family:'Space Mono',monospace;font-size:12px">⚠ Enter at least 2 chords</div>`;
+          document.getElementById("progResult").style.display = "block";
+          return;
+        }
+        const chords = parts
+          .map((p) => parseChordInput(p, curKey))
+          .filter(Boolean);
+        if (chords.length < 2) {
+          document.getElementById("progResult").innerHTML =
+            `<div style="padding:1rem;color:var(--lil-warn);font-family:'Space Mono',monospace;font-size:12px">⚠ Could not parse chords. Try: Dm7 G7 Cmaj7</div>`;
+          document.getElementById("progResult").style.display = "block";
+          return;
+        }
+        const strings = getStrings();
+        const result = optimizeProgression(chords, curAlgo, strings);
+        if (!result) {
+          document.getElementById("progResult").innerHTML =
+            `<div style="padding:1rem;color:var(--lil-warn);font-family:'Space Mono',monospace;font-size:12px">⚠ Could not generate voicings for this progression.</div>`;
+          document.getElementById("progResult").style.display = "block";
+          return;
+        }
+
+        // Compute quality metrics
+        let totalMove = 0;
+        let lilCount = 0;
+        for (let i = 1; i < result.length; i++) {
+          totalMove += voiceLeadScore(result[i - 1].voicing, result[i].voicing);
+          if (result[i].voicing.lilViolation) lilCount++;
+        }
+        const avgMove = (totalMove / (result.length - 1)).toFixed(1);
+
+        let html = `<div class="prog-header">
+    <span class="prog-label">Progression Analysis · ${curStrings}-string · Key of ${curKey}</span>
+    <div class="prog-quality-bar">
+      <span class="quality-badge qb-smooth">Avg motion: ${avgMove} st</span>
+      ${lilCount > 0 ? `<span class="quality-badge qb-lil">LIL: ${lilCount} chord${lilCount > 1 ? "s" : ""} flagged</span>` : `<span class="quality-badge qb-ergonomic">LIL: Clean</span>`}
+      <span class="quality-badge qb-ergonomic">Voicings: ${curAlgo}</span>
+    </div>
+  </div>
+  <div class="prog-sequence">`;
+
+        result.forEach((r, idx) => {
+          const prevR = idx > 0 ? result[idx - 1] : null;
+          const nextR = idx < result.length - 1 ? result[idx + 1] : null;
+          const ct = prevR
+            ? new Set(commonTones(prevR.voicing, r.voicing))
+            : new Set();
+          const paths = prevR ? buildVoicePaths(prevR.voicing, r.voicing) : [];
+          const fn = guessFunction(r.chord, curKey);
+          const hasLIL = r.voicing.lilViolation;
+          const altVoicings = r.candidates.filter((_, i) => i > 0 && i < 3);
+
+          // Arrow connector (before this chord)
+          if (prevR) {
+            html += `<div class="chord-arrow">`;
+            paths.forEach((p) => {
+              const cls =
+                p.type === "ct" ? "va-ct" : p.type === "37" ? "va-37" : "va-73";
+              const label =
+                p.type === "ct" ? "CT" : p.type === "37" ? "3→7" : "7→3";
+              const noteFrom = enharmonic(p.from.semi, curKey);
+              const noteTo = enharmonic(p.to.semi, curKey);
+              html += `<div class="voice-arrow ${cls}">
+          <span class="va-label">${noteFrom}</span>
+          <span class="va-line" style="background:${p.type === "ct" ? "var(--common-tone)" : p.type === "37" ? "var(--arrow-37)" : "var(--arrow-73)"}"></span>
+          <span class="va-label">${noteTo}</span>
+        </div>`;
+            });
+            if (paths.length === 0) {
+              html += `<div class="voice-arrow va-other"><span style="font-size:9px;color:var(--text3)">→</span></div>`;
+            }
+            html += `</div>`;
+          }
+
+          html += `<div class="prog-chord-block${hasLIL ? " lil-flagged" : ""}">
+      <div class="pcb-name">${r.chord.name}</div>
+      <div class="pcb-function">${fn}</div>
+      ${hasLIL ? `<div style="margin-bottom:.4rem"><span class="lil-warn">⚠ LIL</span></div>` : ""}
+      <div class="pcb-fret">${makeFretSVG(r.voicing.placed, strings, ct, [], true, r.chord)}</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:.4rem">
+        ${r.voicing.placed.map((p) => `<span class="pill ${ROLE_CLASS[p.role] || "n-5th"}" style="font-size:10px">${enharmonic(p.semi, curKey)}<span style="opacity:.6;font-size:9px"> ${p.role}</span></span>`).join("")}
+      </div>
+      ${ct.size > 0 ? `<div style="margin-top:.4rem;font-size:10px;color:var(--common-tone);font-family:'Space Mono',monospace">⬤ Common: ${[...ct].map((s) => enharmonic(s, curKey)).join(", ")}</div>` : ""}
+      <div style="margin-top:.4rem;font-size:10px;color:var(--text3);font-family:'Space Mono',monospace;display:flex;gap:8px;flex-wrap:wrap">
+        <span>Span: ${r.voicing.span} fret${r.voicing.span === 1 ? "" : "s"}</span>
+        ${r.voicing.is10th ? `<span style="color:var(--blue)">⬤ 10th voicing</span>` : ""}
+        ${prevR ? `<span>Top→ ${enharmonic(r.voicing.placed.reduce((a, b) => (midiAbsOf(b) > midiAbsOf(a) ? b : a)).semi, curKey)}</span>` : ""}
+        ${(() => {
+          if (!prevR) return "";
+          const prevTop = prevR.voicing.placed.reduce((a, b) =>
+            midiAbsOf(b) > midiAbsOf(a) ? b : a,
+          );
+          const curTop = r.voicing.placed.reduce((a, b) =>
+            midiAbsOf(b) > midiAbsOf(a) ? b : a,
+          );
+          const motion = Math.abs(midiAbsOf(curTop) - midiAbsOf(prevTop));
+          const pathLabels = paths
+            .map((p) => {
+              if (p.type === "ct")
+                return `<span style="color:var(--common-tone)">Common Tone</span>`;
+              if (p.type === "37")
+                return `<span style="color:var(--arrow-37)">3→7 Resolution</span>`;
+              if (p.type === "73")
+                return `<span style="color:var(--arrow-73)">7→3 Resolution</span>`;
+              return "";
+            })
+            .filter(Boolean);
+          const motionLabel =
+            motion <= 2
+              ? `<span style="color:var(--blue)">Stepwise Top Voice</span>`
+              : "";
+          const all = [
+            ...pathLabels,
+            motionLabel && !pathLabels.length ? motionLabel : "",
+          ].filter(Boolean);
+          return all.length ? all.join(" · ") : "";
+        })()}
+      </div>
+    </div>`;
+        });
+
+        html += `</div>`;
+
+        // Voice path legend
+        html += `<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:.8rem;font-size:11px;font-family:'Space Mono',monospace">
+    <span style="color:var(--common-tone)">⬤ Common Tone (gold glow)</span>
+    <span style="color:var(--arrow-37)">3→7 Resolution</span>
+    <span style="color:var(--arrow-73)">7→3 Resolution</span>
+    <span style="color:var(--text3)">— Stepwise motion</span>
+  </div>`;
+
+        document.getElementById("progResult").innerHTML = html;
+        document.getElementById("progResult").style.display = "block";
+      }
+
+      // ── Chord Data (original) ───────────────────────────────────────────────────
       const DATA = [
         {
           group: "Triads",
@@ -718,7 +2430,7 @@
                 { i: [3, ""], t: "n-3rd" },
                 { i: [7, ""], t: "n-7th" },
               ],
-              tip: "Shell: Root–3–maj7. B rất sáng.",
+              tip: "Shell: Root–3–maj7.",
               tipE: "Shell: Root–3–maj7. Maj7 is bright; use higher register.",
             },
             {
@@ -738,8 +2450,8 @@
                 { i: [7, ""], t: "n-7th" },
                 { i: [2, ""], t: "n-tension" },
               ],
-              tip: "D (9th) thêm vào sau maj7 — rất R&B.",
-              tipE: "9th layered over maj7 — classic R&B sound.",
+              tip: "9th thêm vào sau maj7 — rất R&B.",
+              tipE: "9th layered over maj7 — classic R&B.",
             },
             {
               name: "Cmaj13",
@@ -776,27 +2488,8 @@
                 { i: [7, ""], t: "n-7th" },
                 { i: [4, "#"], t: "n-tension" },
               ],
-              tip: "#11 = Lydian mode. Phảng phất, mơ mộng.",
+              tip: "#11 = Lydian mode.",
               tipE: "#11 = Lydian mode. Dreamy and floating.",
-            },
-            {
-              name: "Cmaj7#5",
-              aka: "",
-              f: "1–3–#5–maj7",
-              ni: [
-                [1, ""],
-                [3, ""],
-                [5, "#"],
-                [7, ""],
-              ],
-              b: [
-                { i: [1, ""], t: "n-root" },
-                { i: [3, ""], t: "n-3rd" },
-                { i: [5, "#"], t: "n-5th" },
-                { i: [7, ""], t: "n-7th" },
-              ],
-              tip: "#5 tạo màu augmented trên nền maj7.",
-              tipE: "#5 adds augmented color over maj7.",
             },
             {
               name: "C6",
@@ -813,8 +2506,8 @@
                 { i: [3, ""], t: "n-3rd" },
                 { i: [6, ""], t: "n-tension" },
               ],
-              tip: "6th thay 7th — nhẹ hơn, hay cuối câu.",
-              tipE: "6th replaces 7th — lighter, great at phrase endings.",
+              tip: "6th thay 7th — nhẹ hơn.",
+              tipE: "6th replaces 7th — lighter feel.",
             },
             {
               name: "C6/9",
@@ -832,7 +2525,7 @@
                 { i: [6, ""], t: "n-tension" },
                 { i: [2, ""], t: "n-tension" },
               ],
-              tip: "Neo-soul, R&B — rất thường gặp.",
+              tip: "Neo-soul, R&B.",
               tipE: "Neo-soul and R&B staple.",
             },
             {
@@ -851,7 +2544,7 @@
                 { i: [5, ""], t: "n-5th" },
                 { i: [2, ""], t: "n-tension" },
               ],
-              tip: "9th không có 7th → trong sáng hơn maj9.",
+              tip: "9th không có 7th → trong sáng.",
               tipE: "9th without 7th → cleaner than maj9.",
             },
           ],
@@ -876,7 +2569,7 @@
                 { i: [3, "b"], t: "n-3rd" },
                 { i: [7, "b"], t: "n-7th" },
               ],
-              tip: "Shell: Root–b3–b7. Bộ ba cốt lõi.",
+              tip: "Shell: Root–b3–b7.",
               tipE: "Shell: Root–b3–b7. The essential minor 7 core.",
             },
             {
@@ -895,7 +2588,7 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [2, ""], t: "n-tension" },
               ],
-              tip: "9th thêm độ mềm, R&B jazz.",
+              tip: "9th thêm độ mềm.",
               tipE: "9th adds softness — very jazz/R&B.",
             },
             {
@@ -914,7 +2607,7 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [4, ""], t: "n-tension" },
               ],
-              tip: "11th = không gian, lơ lửng.",
+              tip: "11th = không gian.",
               tipE: "11th = space and suspension.",
             },
             {
@@ -933,7 +2626,7 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [6, ""], t: "n-tension" },
               ],
-              tip: "Natural 13 trên minor — tinh tế.",
+              tip: "Natural 13 trên minor.",
               tipE: "Natural 13 over minor — subtle and refined.",
             },
             {
@@ -951,27 +2644,8 @@
                 { i: [3, "b"], t: "n-3rd" },
                 { i: [6, ""], t: "n-tension" },
               ],
-              tip: "Major 6 trên minor — rất đẹp.",
-              tipE: "Major 6 over minor — beautiful, melancholic.",
-            },
-            {
-              name: "Cm6/9",
-              aka: "",
-              f: "1–b3–6–9",
-              ni: [
-                [1, ""],
-                [3, "b"],
-                [6, ""],
-                [2, ""],
-              ],
-              b: [
-                { i: [1, ""], t: "n-root" },
-                { i: [3, "b"], t: "n-3rd" },
-                { i: [6, ""], t: "n-tension" },
-                { i: [2, ""], t: "n-tension" },
-              ],
-              tip: "Đặc trưng neo-soul, D'Angelo style.",
-              tipE: "Neo-soul staple — D'Angelo signature.",
+              tip: "Major 6 trên minor.",
+              tipE: "Major 6 over minor — beautiful.",
             },
             {
               name: "CmMaj7",
@@ -988,26 +2662,8 @@
                 { i: [3, "b"], t: "n-3rd" },
                 { i: [7, ""], t: "n-7th" },
               ],
-              tip: "Rất căng thẳng — hay dùng trong nhạc film.",
-              tipE: "Very tense and dramatic — common in film scores.",
-            },
-            {
-              name: "Cmadd9",
-              aka: "",
-              f: "1–b3–5–9",
-              ni: [
-                [1, ""],
-                [3, "b"],
-                [5, ""],
-                [2, ""],
-              ],
-              b: [
-                { i: [1, ""], t: "n-root" },
-                { i: [3, "b"], t: "n-3rd" },
-                { i: [2, ""], t: "n-tension" },
-              ],
-              tip: "Màu minor nhưng mở hơn nhờ 9th.",
-              tipE: "Minor color lifted slightly by the 9th.",
+              tip: "Rất căng thẳng.",
+              tipE: "Very tense — common in film scores.",
             },
             {
               name: "Cmø / Cm7b5",
@@ -1025,19 +2681,19 @@
                 { i: [5, "b"], t: "n-5th" },
                 { i: [7, "b"], t: "n-7th" },
               ],
-              tip: "iim7b5 trong minor key. b5 quan trọng.",
-              tipE: "iim7b5 in minor key. The b5 is essential.",
+              tip: "iiø trong minor ii–V–i.",
+              tipE: "iiø in minor ii–V–i progressions.",
             },
           ],
         },
         {
-          group: "Dominant 7th",
-          groupE: "Dominant 7th",
+          group: "Dominant 7th & biến thể",
+          groupE: "Dominant 7th & Variations",
           cat: "dom7",
           rows: [
             {
               name: "C7",
-              aka: "dom 7th",
+              aka: "dom7",
               f: "1–3–5–b7",
               ni: [
                 [1, ""],
@@ -1050,8 +2706,8 @@
                 { i: [3, ""], t: "n-3rd" },
                 { i: [7, "b"], t: "n-7th" },
               ],
-              tip: "Shell: Root–3–b7. Dominant rõ nhất.",
-              tipE: "Shell: Root–3–b7. Clearest dominant statement.",
+              tip: "Căng nhất trong ba màu cốt lõi.",
+              tipE: "Most tension in the core tones.",
             },
             {
               name: "C9",
@@ -1069,8 +2725,8 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [2, ""], t: "n-tension" },
               ],
-              tip: "9th thêm màu R&B — rất phổ biến trong funk.",
-              tipE: "9th adds R&B/funk color — extremely common.",
+              tip: "9th thêm màu R&B.",
+              tipE: "9th adds R&B/funk color.",
             },
             {
               name: "C13",
@@ -1088,7 +2744,7 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [6, ""], t: "n-tension" },
               ],
-              tip: "13th = full, âm ấm, V13 thông dụng.",
+              tip: "13th = âm ấm.",
               tipE: "13th = full, warm dominant sound.",
             },
             {
@@ -1106,27 +2762,8 @@
                 { i: [4, ""], t: "n-tension" },
                 { i: [7, "b"], t: "n-7th" },
               ],
-              tip: "4th thay 3rd — không resolve ngay, rất R&B.",
-              tipE: "4th replaces 3rd — unresolved dominant, very R&B.",
-            },
-            {
-              name: "C9sus4",
-              aka: "",
-              f: "1–4–b7–9",
-              ni: [
-                [1, ""],
-                [4, ""],
-                [7, "b"],
-                [2, ""],
-              ],
-              b: [
-                { i: [1, ""], t: "n-root" },
-                { i: [4, ""], t: "n-tension" },
-                { i: [7, "b"], t: "n-7th" },
-                { i: [2, ""], t: "n-tension" },
-              ],
-              tip: "Rất R&B — D'Angelo, Stevie Wonder.",
-              tipE: "Very R&B — D'Angelo and Stevie Wonder hallmark.",
+              tip: "4th thay 3rd.",
+              tipE: "4th replaces 3rd — unresolved dominant.",
             },
             {
               name: "Cdim7",
@@ -1144,13 +2781,13 @@
                 { i: [5, "b"], t: "n-5th" },
                 { i: [7, "bb"], t: "n-7th" },
               ],
-              tip: "Symmetrical — hay dùng làm passing chord.",
+              tip: "Symmetrical — passing chord.",
               tipE: "Symmetrical — excellent as a passing chord.",
             },
           ],
         },
         {
-          group: "Altered Dominant — chơi trên V7",
+          group: "Altered Dominant",
           groupE: "Altered Dominant — use over V7",
           cat: "alt",
           rows: [
@@ -1170,8 +2807,8 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [2, "b"], t: "n-tension" },
               ],
-              tip: "b9 rất căng — giải quyết mạnh về tonic.",
-              tipE: "b9 = strong pull toward tonic resolution.",
+              tip: "b9 rất căng.",
+              tipE: "b9 = strong pull toward tonic.",
             },
             {
               name: "C7#9",
@@ -1208,8 +2845,8 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [6, "b"], t: "n-tension" },
               ],
-              tip: "b13 = altered tone hay nhất cho bass lick.",
-              tipE: "b13 = the most useful altered tone for bass licks.",
+              tip: "b13 = altered tone.",
+              tipE: "b13 = most useful altered tone.",
             },
             {
               name: "C7#11",
@@ -1227,28 +2864,8 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [4, "#"], t: "n-tension" },
               ],
-              tip: "#11 = Lydian dominant = Bb melodic minor bậc 4.",
-              tipE: "#11 = Lydian dominant; from Bb melodic minor.",
-            },
-            {
-              name: "C13b9",
-              aka: "",
-              f: "1–3–b7–b9–13",
-              ni: [
-                [1, ""],
-                [3, ""],
-                [7, "b"],
-                [2, "b"],
-                [6, ""],
-              ],
-              b: [
-                { i: [1, ""], t: "n-root" },
-                { i: [3, ""], t: "n-3rd" },
-                { i: [7, "b"], t: "n-7th" },
-                { i: [2, "b"], t: "n-tension" },
-              ],
-              tip: "b9 và 13 — jazz rất đặc trưng.",
-              tipE: "Combines b9 and 13 — classic jazz tension.",
+              tip: "#11 = Lydian dominant.",
+              tipE: "#11 = Lydian dominant.",
             },
             {
               name: "C7#9b13",
@@ -1267,28 +2884,8 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [2, "#"], t: "n-tension" },
               ],
-              tip: "Full altered — từ altered scale. Căng nhất.",
+              tip: "Full altered — căng nhất.",
               tipE: "Full altered dominant — maximum tension.",
-            },
-            {
-              name: "C7b9b13",
-              aka: "",
-              f: "1–3–b7–b9–b13",
-              ni: [
-                [1, ""],
-                [3, ""],
-                [7, "b"],
-                [2, "b"],
-                [6, "b"],
-              ],
-              b: [
-                { i: [1, ""], t: "n-root" },
-                { i: [3, ""], t: "n-3rd" },
-                { i: [7, "b"], t: "n-7th" },
-                { i: [2, "b"], t: "n-tension" },
-              ],
-              tip: "b9+b13 = Spanish Phrygian vibe.",
-              tipE: "b9+b13 = Spanish Phrygian vibe.",
             },
           ],
         },
@@ -1336,23 +2933,6 @@
               tipE: "11th very effective in neo-soul.",
             },
             {
-              name: "C11",
-              aka: "dom 11",
-              f: "1–(3)–b7–11",
-              ni: [
-                [1, ""],
-                [7, "b"],
-                [4, ""],
-              ],
-              b: [
-                { i: [1, ""], t: "n-root" },
-                { i: [7, "b"], t: "n-7th" },
-                { i: [4, ""], t: "n-tension" },
-              ],
-              tip: "3rd thường bỏ — 4th và b7 đủ xác định.",
-              tipE: "3rd usually omitted — 4th and b7 define it.",
-            },
-            {
               name: "C13#11",
               aka: "",
               f: "1–3–b7–#11–13",
@@ -1369,7 +2949,7 @@
                 { i: [7, "b"], t: "n-7th" },
                 { i: [4, "#"], t: "n-tension" },
               ],
-              tip: "Jazz fusion, Herbie Hancock style.",
+              tip: "Jazz fusion.",
               tipE: "Jazz fusion — Herbie Hancock signature.",
             },
           ],
@@ -1394,7 +2974,7 @@
                 { i: [1, ""], t: "n-root" },
                 { i: [5, ""], t: "n-5th" },
               ],
-              tip: "Bass chơi 3rd — chuyển động êm.",
+              tip: "Bass chơi 3rd.",
               tipE: "Bass plays 3rd — smooth voice leading.",
             },
             {
@@ -1412,8 +2992,8 @@
                 { i: [1, ""], t: "n-root" },
                 { i: [3, ""], t: "n-3rd" },
               ],
-              tip: "Bass chơi 5th — đỡ hơn root.",
-              tipE: "Bass plays 5th — supportive below root.",
+              tip: "Bass chơi 5th.",
+              tipE: "Bass plays 5th — supportive.",
             },
             {
               name: "Cdim7",
@@ -1431,17 +3011,20 @@
                 { i: [5, "b"], t: "n-5th" },
                 { i: [7, "bb"], t: "n-7th" },
               ],
-              tip: "Passing chord giữa hai diatonic chord.",
-              tipE: "Passing chord between two diatonic chords.",
+              tip: "Passing chord.",
+              tipE: "Passing chord between diatonic chords.",
             },
           ],
         },
       ];
 
-      // ── State & keys ───────────────────────────────────────────────────────────
+      // ── State ───────────────────────────────────────────────────────────────────
       let curKey = "C",
         curFilter = "all",
-        curTab = "vie";
+        curTab = "vl",
+        curStrings = 4,
+        curAlgo = "stepwise",
+        curLIL = true;
       const KEYS = [
         { l: "C", k: "C" },
         { l: "Db", k: "Db" },
@@ -1457,7 +3040,7 @@
         { l: "B", k: "B" },
       ];
 
-      // Build key selector
+      // ── Key selector ────────────────────────────────────────────────────────────
       const keyEl = document.getElementById("keySelector");
       KEYS.forEach((k) => {
         const b = document.createElement("button");
@@ -1475,7 +3058,19 @@
         keyEl.appendChild(b);
       });
 
-      // Tab switching
+      // ── String toggle ───────────────────────────────────────────────────────────
+      document.getElementById("stringToggle").addEventListener("click", (e) => {
+        const b = e.target.closest(".st-btn");
+        if (!b) return;
+        document
+          .querySelectorAll(".st-btn")
+          .forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        curStrings = parseInt(b.dataset.strings);
+        render();
+      });
+
+      // ── Tab bar ─────────────────────────────────────────────────────────────────
       document.getElementById("tabBar").addEventListener("click", (e) => {
         const b = e.target.closest(".tab-btn");
         if (!b) return;
@@ -1488,7 +3083,40 @@
         render();
       });
 
-      // Filters
+      // ── Algo options ────────────────────────────────────────────────────────────
+      document.getElementById("algoOpts").addEventListener("click", (e) => {
+        const b = e.target.closest(".algo-btn");
+        if (!b) return;
+        document
+          .querySelectorAll("#algoOpts .algo-btn")
+          .forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        curAlgo = b.dataset.algo;
+      });
+
+      // ── LIL toggle ──────────────────────────────────────────────────────────────
+      document
+        .getElementById("lilToggle")
+        .addEventListener("click", function () {
+          curLIL = !curLIL;
+          this.textContent = curLIL ? "ON" : "OFF";
+          this.classList.toggle("active", curLIL);
+        });
+
+      // ── Analyze button ───────────────────────────────────────────────────────────
+      document.getElementById("vlAnalyze").onclick = () => {
+        renderProgression(document.getElementById("vlInput").value);
+      };
+      document.getElementById("vlInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") renderProgression(e.target.value);
+      });
+
+      function setPreset(val) {
+        document.getElementById("vlInput").value = val;
+        renderProgression(val);
+      }
+
+      // ── Filters ─────────────────────────────────────────────────────────────────
       const FILTERS_VIE = [
         { l: "Tất cả", c: "all" },
         { l: "Triads", c: "triad" },
@@ -1513,7 +3141,15 @@
       function buildFilters() {
         const fbar = document.getElementById("filterBar");
         fbar.innerHTML = "";
-        const filters = curTab === "eng" ? FILTERS_ENG : FILTERS_VIE;
+        const filters =
+          curTab === "eng" || curTab === "fretboard"
+            ? FILTERS_ENG
+            : FILTERS_VIE;
+        const show = curTab !== "vl";
+        document.querySelector(".controls").style.display = show
+          ? "flex"
+          : "none";
+        if (!show) return;
         filters.forEach((f) => {
           const b = document.createElement("button");
           b.className = "fbtn" + (f.c === curFilter ? " active" : "");
@@ -1533,22 +3169,28 @@
           curTab === "eng" ? "Group:" : "Nhóm:";
       }
 
+      function groups() {
+        return curFilter === "all"
+          ? DATA
+          : DATA.filter((g) => g.cat === curFilter);
+      }
+
       function buildLegend() {
-        const isE = curTab === "eng";
+        const isE = curTab === "eng" || curTab === "fretboard";
         const items = isE
           ? [
               { c: "#378ADD", l: "Root (required)" },
               { c: "#639922", l: "3rd / b3 (quality)" },
-              { c: "#BA7517", l: "7th / b7 / maj7 (color)" },
-              { c: "#7F77DD", l: "Tension (9, 11, 13, alt)" },
-              { c: "#888780", l: "5th (neutral)" },
+              { c: "#c07820", l: "7th (color)" },
+              { c: "#7a60d8", l: "Tension (9,11,13,alt)" },
+              { c: "#555550", l: "5th (neutral)" },
             ]
           : [
               { c: "#378ADD", l: "Root (bắt buộc)" },
-              { c: "#639922", l: "3rd / b3 (chất chord)" },
-              { c: "#BA7517", l: "7th / b7 / maj7 (màu)" },
-              { c: "#7F77DD", l: "Tension (9, 11, 13, alt)" },
-              { c: "#888780", l: "5th (trung tính)" },
+              { c: "#639922", l: "3rd / b3" },
+              { c: "#c07820", l: "7th" },
+              { c: "#7a60d8", l: "Tension" },
+              { c: "#555550", l: "5th" },
             ];
         document.getElementById("legend").innerHTML = items
           .map(
@@ -1558,33 +3200,56 @@
           .join("");
       }
 
-      // ── Get filtered groups ────────────────────────────────────────────────────
-      function groups() {
-        return curFilter === "all"
-          ? DATA
-          : DATA.filter((g) => g.cat === curFilter);
+      // ── Fretboard SVG for reference view ────────────────────────────────────────
+      function makeFretSVG_ref(bassNotes) {
+        const strings = getStrings();
+        const placed = [];
+        bassNotes.forEach((b) => {
+          const noteName = iNote(curKey, b.i[0], b.i[1]);
+          const ns = N2S[noteName];
+          const roleMap = {
+            "n-root": "root",
+            "n-3rd": "3rd",
+            "n-7th": "7th",
+            "n-tension": "tension",
+            "n-5th": "5th",
+          };
+          const role = roleMap[b.t] || "5th";
+          strings.forEach((str) => {
+            placed.push({
+              strObj: str,
+              fret: fretOf(ns, str.semi),
+              semi: ns,
+              role,
+            });
+          });
+        });
+        return makeFretSVG(placed, strings, new Set(), [], false, null);
       }
 
-      // ── Chord name transposition (root only, using correct key convention) ──────
-      function tChord(name, key) {
-        if (name.includes(" / "))
-          return name
-            .split(" / ")
-            .map((p) => tChord(p, key))
-            .join(" / ");
-        const m = name.match(/^([A-G][#b]?)(.*)/);
-        if (!m) return name;
-        const FLAT_K = new Set(["F", "Bb", "Eb", "Ab", "Db", "Gb"]);
-        const names = FLAT_K.has(key)
-          ? FL
-          : ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-        // offset from C
-        const rootSemi = N2S[m[1]];
-        const keySemi = N2S[key];
-        return names[(((rootSemi + keySemi) % 12) + 12) % 12] + m[2];
+      function makePosTable(bassNotes) {
+        const strings = getStrings();
+        const isE = curTab === "eng";
+        let h = `<div class="pos-wrap"><table class="pos-table"><thead><tr><th>Note</th>`;
+        strings.forEach((s) => (h += `<th>${s.name}</th>`));
+        h += `</tr></thead><tbody>`;
+        bassNotes.forEach((b) => {
+          const noteName = iNote(curKey, b.i[0], b.i[1]);
+          const ns = N2S[noteName];
+          const frets = strings.map((st) => fretOf(ns, st.semi));
+          const minF = Math.min(...frets);
+          h += `<tr><td><span class="pill ${b.t}">${noteName}</span></td>`;
+          frets.forEach((f) => {
+            const best = f === minF;
+            h += `<td class="${best ? "best" : ""}">${f === 0 ? `<span class="open-lbl">open</span>` : `fret ${f}`}${best ? '<span class="star">★</span>' : ""}</td>`;
+          });
+          h += `</tr>`;
+        });
+        h += `</tbody></table></div>`;
+        return h;
       }
 
-      // ── Render: VIE / ENG table ────────────────────────────────────────────────
+      // ── Render functions ─────────────────────────────────────────────────────────
       function renderTable(lang) {
         const gs = groups();
         const total = gs.reduce((s, g) => s + g.rows.length, 0);
@@ -1593,12 +3258,12 @@
         let html = "";
         gs.forEach((g) => {
           const gname = lang === "eng" ? g.groupE : g.group;
-          html += `<div class="group-block"><div class="group-label">${gname}<span class="grp-cnt">(${g.rows.length})</span></div>
+          html += `<div class="group-block"><div class="group-label">${gname}<span class="grp-cnt"> (${g.rows.length})</span></div>
     <table class="ctable"><thead><tr>
       <th style="width:105px">${lang === "eng" ? "Chord" : "Hợp âm"}</th>
-      <th style="width:125px">${lang === "eng" ? "Formula" : "Công thức"}</th>
+      <th style="width:110px">${lang === "eng" ? "Formula" : "Công thức"}</th>
       <th>${lang === "eng" ? "All notes" : "Tất cả notes"}</th>
-      <th style="width:200px">${lang === "eng" ? "3–4 bass notes" : "3–4 notes cho bass"}</th>
+      <th style="width:190px">${lang === "eng" ? "Bass notes" : "Notes cho bass"}</th>
       <th>${lang === "eng" ? "Notes" : "Ghi chú"}</th>
     </tr></thead><tbody>`;
           g.rows.forEach((r) => {
@@ -1624,114 +3289,14 @@
         document.getElementById("container").innerHTML = html;
       }
 
-      // ── Fretboard SVG ──────────────────────────────────────────────────────────
-      const FB_STR = [
-        { name: "G", deg: 5, acc: "", y: 18, sw: 0.8 },
-        { name: "D", deg: 2, acc: "", y: 43, sw: 1.2 },
-        { name: "A", deg: 6, acc: "", y: 68, sw: 1.8 },
-        { name: "E", deg: 3, acc: "b", y: 93, sw: 2.4 },
-      ];
-      // Open string notes for standard tuning (E A D G) as intervals from C major:
-      // E=3(C's 3rd=E? No — we need absolute semitones for string open notes)
-      // Actually: open strings are absolute: E=4, A=9, D=2, G=7 semitones
-      const FB_OPEN = [
-        { name: "G", semi: 7, y: 18, sw: 0.8 },
-        { name: "D", semi: 2, y: 43, sw: 1.2 },
-        { name: "A", semi: 9, y: 68, sw: 1.8 },
-        { name: "E", semi: 4, y: 93, sw: 2.4 },
-      ];
-      const FB_FILL = {
-        "n-root": "#378ADD",
-        "n-3rd": "#4a8c1a",
-        "n-7th": "#c07820",
-        "n-tension": "#6660cc",
-        "n-5th": "#888780",
-      };
-
-      function dotX(fret) {
-        return fret === 0 ? 22 : 40 + (fret - 0.5) * 55;
-      }
-      function fretLX(n) {
-        return 40 + n * 55;
-      }
-
-      function makeFretSVG(bassNotes) {
-        const dm = window.matchMedia("(prefers-color-scheme:dark)").matches;
-        const LC = dm ? "rgba(255,255,255,.14)" : "rgba(0,0,0,.11)";
-        const TC = dm ? "#707068" : "#888780";
-        const NC = dm ? "rgba(255,255,255,.4)" : "rgba(0,0,0,.38)";
-        const MC = dm ? "rgba(255,255,255,.10)" : "rgba(0,0,0,.07)";
-        let s = `<svg viewBox="0 0 700 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">`;
-        for (let f = 1; f <= 12; f++) {
-          const x = fretLX(f);
-          s += `<line x1="${x}" y1="8" x2="${x}" y2="98" stroke="${LC}" stroke-width="${f === 12 ? 1.5 : 0.7}"/>`;
-        }
-        s += `<line x1="40" y1="6" x2="40" y2="100" stroke="${NC}" stroke-width="3.5"/>`;
-        [3, 5, 7, 9].forEach(
-          (f) =>
-            (s += `<circle cx="${dotX(f)}" cy="80" r="3.5" fill="${MC}"/>`),
-        );
-        s += `<circle cx="${dotX(12) - 8}" cy="80" r="3.5" fill="${MC}"/><circle cx="${dotX(12) + 8}" cy="80" r="3.5" fill="${MC}"/>`;
-        [3, 5, 7, 9, 12].forEach(
-          (f) =>
-            (s += `<text x="${dotX(f)}" y="112" text-anchor="middle" font-size="9" fill="${TC}">${f}</text>`),
-        );
-        FB_OPEN.forEach((str) => {
-          s += `<line x1="38" y1="${str.y}" x2="698" y2="${str.y}" stroke="${LC}" stroke-width="${str.sw}"/>`;
-          s += `<text x="34" y="${str.y + 4}" text-anchor="end" font-size="10" font-weight="500" fill="${TC}">${str.name}</text>`;
-        });
-        bassNotes.forEach((b) => {
-          const noteName = iNote(curKey, b.i[0], b.i[1]);
-          const ns = N2S[noteName];
-          const fill = FB_FILL[b.t] || "#888780";
-          FB_OPEN.forEach((str) => {
-            const fret = (((ns - str.semi) % 12) + 12) % 12;
-            const cx = dotX(fret),
-              cy = str.y;
-            s += `<circle cx="${cx}" cy="${cy}" r="10.5" fill="${fill}" stroke="white" stroke-width="1.5"/>`;
-            s += `<text x="${cx}" y="${cy + 3.5}" text-anchor="middle" font-size="8.5" font-weight="600" fill="white">${noteName}</text>`;
-          });
-        });
-        s += `</svg>`;
-        return s;
-      }
-
-      function makePosTable(bassNotes) {
-        const isE = curTab === "eng";
-        const STR = [
-          { n: "E", s: 4 },
-          { n: "A", s: 9 },
-          { n: "D", s: 2 },
-          { n: "G", s: 7 },
-        ];
-        let h = `<div class="pos-wrap"><table class="pos-table">
-    <thead><tr><th>${isE ? "Note" : "Note"}</th><th>E string</th><th>A string</th><th>D string</th><th>G string</th></tr></thead><tbody>`;
-        bassNotes.forEach((b) => {
-          const noteName = iNote(curKey, b.i[0], b.i[1]);
-          const ns = N2S[noteName];
-          const frets = STR.map((st) => (((ns - st.s) % 12) + 12) % 12);
-          const minF = Math.min(...frets);
-          h += `<tr><td><span class="pill ${b.t}">${noteName}</span></td>`;
-          frets.forEach((f) => {
-            const best = f === minF;
-            h += `<td class="${best ? "best" : ""}">${f === 0 ? `<span class="open-lbl">open</span>` : `fret ${f}`}${best ? '<span class="star">★</span>' : ""}</td>`;
-          });
-          h += `</tr>`;
-        });
-        h += `</tbody></table></div>`;
-        return h;
-      }
-
       function renderFretboard() {
-        const isE = curTab === "eng";
+        const isE = true;
         const gs = groups();
         const total = gs.reduce((s, g) => s + g.rows.length, 0);
-        document.getElementById("badge").textContent =
-          total + (isE ? " chords" : " hợp âm");
+        document.getElementById("badge").textContent = total + " chords";
         let html = "";
         gs.forEach((g) => {
-          const gname = isE ? g.groupE : g.group;
-          html += `<div class="group-block"><div class="group-label">${gname}<span class="grp-cnt">(${g.rows.length})</span></div>`;
+          html += `<div class="group-block"><div class="group-label">${g.groupE}<span class="grp-cnt"> (${g.rows.length})</span></div>`;
           g.rows.forEach((r) => {
             const cn = tChord(r.name, curKey);
             const ps = r.b
@@ -1740,9 +3305,13 @@
                   `<span class="pill ${b.t}">${iNote(curKey, b.i[0], b.i[1])}</span>`,
               )
               .join("");
+            const strLabel = curStrings === 5 ? "5-str" : "4-str";
             html += `<div class="fb-card">
-        <div class="fb-hdr"><div><span class="fb-cname">${cn}</span><span class="fb-fm">${r.f}</span></div><div class="pills">${ps}</div></div>
-        <div class="fb-fret">${makeFretSVG(r.b)}</div>
+        <div class="fb-hdr">
+          <div><span class="fb-cname">${cn}</span><span class="fb-fm">${r.f}</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:var(--text3);font-family:'Space Mono',monospace">${strLabel}</span><div class="pills">${ps}</div></div>
+        </div>
+        <div class="fb-fret">${makeFretSVG_ref(r.b)}</div>
         ${makePosTable(r.b)}
       </div>`;
           });
@@ -1751,15 +3320,36 @@
         document.getElementById("container").innerHTML = html;
       }
 
+      function renderVL() {
+        document.getElementById("container").innerHTML =
+          `<div style="padding:2rem 0;text-align:center;color:var(--text3);font-family:'Space Mono',monospace;font-size:12px">
+    <div style="font-size:32px;margin-bottom:1rem">◆</div>
+    <div>Enter a chord progression above to analyze voice leading</div>
+    <div style="margin-top:.5rem;opacity:.6">e.g. Dm7 G7 Cmaj7 &nbsp;·&nbsp; ii7 V7 Imaj7 &nbsp;·&nbsp; Am7 D7 Gmaj7</div>
+  </div>`;
+        document.getElementById("legend").innerHTML = "";
+      }
+
       function render() {
+        document.getElementById("vlPanel").style.display =
+          curTab === "vl" ? "block" : "none";
         buildLegend();
-        if (curTab === "vie") renderTable("vie");
+        if (curTab === "vl") renderVL();
+        else if (curTab === "vie") renderTable("vie");
         else if (curTab === "eng") renderTable("eng");
         else renderFretboard();
       }
 
       buildFilters();
       render();
+
+      // Auto-load a demo on first load
+      setTimeout(() => {
+        if (curTab === "vl") {
+          document.getElementById("vlInput").value = "Dm7 G7 Cmaj7";
+          renderProgression("Dm7 G7 Cmaj7");
+        }
+      }, 200);
     </script>
   </body>
 </html>
